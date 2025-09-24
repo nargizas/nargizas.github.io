@@ -1,3 +1,5 @@
 # theme: jekyll-theme-minimal
 title: nargizas' homepage
 description: join me on my "what am I doing with my life" journeys
+sass:
+  style: compressed
