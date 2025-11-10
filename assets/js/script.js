@@ -1,20 +1,30 @@
 
-// Function to change the background color of a button on hover
-function changeButtonColorOnHover() {
-    const buttons = document.querySelectorAll('.hover-color-change');
-  
-    buttons.forEach((button) => {
-      button.addEventListener('mouseover', () => {
-        button.style.backgroundColor = '#FFA500'; // Change to your desired color
-      });
-  
-      button.addEventListener('mouseout', () => {
-        button.style.backgroundColor = ''; // Reset the background color
-      });
-    });
-  }
-  
-  // Call the function when the DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    changeButtonColorOnHover();
+
+// Call the function when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  const links = document.querySelectorAll('.nav-links a');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
   });
+
+  // Close menu when clicking a link
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+  });
+});

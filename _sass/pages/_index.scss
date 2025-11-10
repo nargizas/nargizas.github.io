@@ -4,8 +4,8 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 16px;
-    width: 70vw;
-    height: 40vw;
+    width: 60vw;
+    height: 35vw;
     box-shadow:
         0 25px 50px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(255, 255, 255, 0.1),
@@ -13,6 +13,8 @@
     position: relative;
     transform: rotate(-2.5deg);
     transition: all 0.4s ease;
+    min-width: 300px;
+
 
     &:hover {
         transform: rotate(0deg) translateY(-10px);
@@ -22,4 +24,8 @@
             inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
 
+    @media (max-width: 768px) {
+        min-width: auto;
+        transform: rotate(0deg);
+    }
 }
