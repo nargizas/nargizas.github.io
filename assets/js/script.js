@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
   const links = document.querySelectorAll('.nav-links a');
+  const card_front = document.getElementById('content-front');
+  const card_back = document.getElementById('content-back');
+  const flipButton = document.getElementById('flip-button');
 
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
@@ -26,5 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
       hamburger.classList.remove('active');
       navLinks.classList.remove('active');
     }
+  });
+
+  // Flip card functionality
+  flipButton.addEventListener('click', () => {
+    card_front.classList.toggle('flipped');
+    card_back.classList.toggle('flipped');
   });
 });
