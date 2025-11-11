@@ -1,3 +1,5 @@
+@use 'constants';
+
 .card-wrapper {
     width: 85vh;
     height: 55vh;
@@ -6,9 +8,9 @@
     box-sizing: border-box;
     perspective: 1000px;
 
-    &:hover .card {
-        transform: rotateY(180deg);
-    }
+    // &:hover .card {
+    // transform: rotateY(180deg);
+    // }
 }
 
 .card {
@@ -22,10 +24,10 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 16px;
+    border-radius: 12px;
 
     box-shadow:
-        0 25px 50px rgba(0, 0, 0, 0.3),
+        0 20px 40px rgba(0, 0, 0, 0.2),
         0 0 0 1px rgba(255, 255, 255, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.9);
     transform: rotate(-2.5deg);
@@ -42,7 +44,7 @@
     &:hover {
         transform: rotate(0deg) translateY(-10px);
         box-shadow:
-            0 40px 70px rgba(0, 0, 0, 0.4),
+            0 25px 50px rgba(0, 0, 0, 0.3),
             0 0 0 1px rgba(255, 255, 255, 0.2),
             inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
@@ -71,7 +73,7 @@
         svg {
             width: 2.5em;
             height: 2.5em;
-            fill: #FBB13C;
+            fill: constants.$accent-color;
             max-width: 100%;
             height: auto;
         }
@@ -88,7 +90,7 @@
 
 .card-text {
     font-weight: normal;
-    color: #080708;
+    color: constants.$card-text-color;
 
     text-shadow:
         1px 1px 0 rgba(255, 255, 255, 0.4),
