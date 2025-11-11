@@ -8,9 +8,11 @@
     box-sizing: border-box;
     perspective: 1000px;
 
-    // &:hover .card {
-    // transform: rotateY(180deg);
-    // }
+    animation: shake 3.6s ease-in-out infinite;
+
+    &:hover {
+        animation: none;
+    }
 }
 
 .card {
@@ -121,4 +123,29 @@ h3 {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+@keyframes shake {
+
+    0%,
+    50%,
+    65% {
+        transform: translateX(0);
+    }
+
+    53% {
+        transform: translateX(-5px);
+    }
+
+    56% {
+        transform: translateX(5px);
+    }
+
+    59% {
+        transform: translateX(-5px);
+    }
+
+    62% {
+        transform: translateX(5px);
+    }
 }
