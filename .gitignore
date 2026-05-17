@@ -47,4 +47,10 @@ _site/
 .bundle/
 vendor/
 
+# Next.js #
+################
+node_modules/
+.next/
+out/
+
 
