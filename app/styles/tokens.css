@@ -1,0 +1,38 @@
+:root {
+  --paper:        #F1EEE4;
+  --paper-2:      #E8E4D7;
+  --ink:          #0E0E10;
+  --ink-2:        #5A5A60;
+  --rule:         #1B1B1F;
+  --accent:       #1B2BFF;
+  --sans: "Geist", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+
+  --gutter:       28px;
+  --row-gap:      96px;
+  --plate-h:      460px;
+  --caption-size: 14px;
+  --caption-lh:   1.55;
+}
+:root[data-density="compact"] {
+  --gutter:       22px;
+  --row-gap:      64px;
+  --plate-h:      380px;
+  --caption-size: 13px;
+  --caption-lh:   1.5;
+}
+:root[data-density="loose"] {
+  --gutter:       36px;
+  --row-gap:      140px;
+  --plate-h:      540px;
+  --caption-size: 15px;
+  --caption-lh:   1.6;
+}
+:root[data-mode="dark"] {
+  --paper:   #0D0D10;
+  --paper-2: #17171B;
+  --ink:     #E9E6DC;
+  --ink-2:   #8A8A92;
+  --rule:    #E9E6DC;
+  --accent:  #6E83FF;
+}
