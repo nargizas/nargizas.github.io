@@ -6,6 +6,7 @@ export default function Reticle({ kind }) {
   const ref = useRef();
   const readRef = useRef();
   const [hot, setHot] = useState(false);
+  const [onPlate, setOnPlate] = useState(false);
 
   useEffect(() => {
     function move(e) {
@@ -24,9 +25,10 @@ export default function Reticle({ kind }) {
     }
     function over(e) {
       const t = e.target;
-      const hover =
-        t.closest && t.closest('a, button, .text-card, .inset-card, .sketch, .plate-wrap');
-      setHot(!!hover);
+      const plate = t.closest && t.closest('.plate-wrap');
+      const clickable = t.closest && t.closest('a, button, .text-card, .inset-card, .sketch');
+      setOnPlate(!!plate);
+      setHot(!!clickable);
     }
     window.addEventListener('mousemove', move);
     window.addEventListener('mouseover', over);
@@ -38,7 +40,7 @@ export default function Reticle({ kind }) {
 
   if (kind === 'system') return null;
 
-  const cls = 'reticle ' + kind + (hot ? ' hot' : '');
+  const cls = 'reticle ' + kind + (onPlate ? ' on-plate' : hot ? ' hot' : '');
   const readout =
     kind === 'dot' || kind === 'ring' || kind === 'regmark' ? null : (
       <span ref={readRef} className="readout">

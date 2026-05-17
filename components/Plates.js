@@ -2,10 +2,20 @@
 
 import { useEffect, useRef } from 'react';
 
-export function HapticPlate() {
+export function HapticPlate({ hovered }) {
+  const svgRef = useRef();
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    if (hovered) svg.unpauseAnimations();
+    else svg.pauseAnimations();
+  }, [hovered]);
+
   return (
     <div className="plate">
       <svg
+        ref={svgRef}
         viewBox="0 0 400 460"
         preserveAspectRatio="xMidYMid slice"
         style={{ background: 'var(--accent)' }}
@@ -68,18 +78,19 @@ export function HapticPlate() {
   );
 }
 
-export function BeautyPlate() {
+export function BeautyPlate({ hovered }) {
+  const playState = hovered ? 'running' : 'paused';
   return (
     <div className="plate" style={{ background: 'var(--paper-2)' }}>
       <svg viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice">
         <rect width="400" height="460" fill="var(--paper-2)" />
-        <g style={{ transformOrigin: '200px 230px', animation: 'spin 60s linear infinite' }}>
+        <g style={{ transformOrigin: '200px 230px', animation: `spin 60s linear infinite`, animationPlayState: playState }}>
           <ellipse cx="200" cy="230" rx="150" ry="60" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".6" />
           <ellipse cx="200" cy="230" rx="120" ry="48" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".5" />
           <ellipse cx="200" cy="230" rx="90" ry="36" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".4" />
           <ellipse cx="200" cy="230" rx="60" ry="24" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".3" />
         </g>
-        <g style={{ transformOrigin: '200px 230px', animation: 'spin-rev 80s linear infinite' }}>
+        <g style={{ transformOrigin: '200px 230px', animation: `spin-rev 80s linear infinite`, animationPlayState: playState }}>
           <ellipse cx="200" cy="230" rx="150" ry="60" transform="rotate(60 200 230)" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".4" />
           <ellipse cx="200" cy="230" rx="120" ry="48" transform="rotate(60 200 230)" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".3" />
         </g>

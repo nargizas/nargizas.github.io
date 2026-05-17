@@ -121,9 +121,10 @@ body::before {
   background: currentColor;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width .2s ease, height .2s ease, color .2s ease;
+  transition: width .2s ease, height .2s ease, color .2s ease, mix-blend-mode .2s ease;
 }
 .reticle.dot.hot { width: 14px; height: 14px; }
+.reticle.dot.on-plate { width: 12px; height: 12px; color: var(--paper); mix-blend-mode: difference; }
 .reticle.dot .readout { left: 12px; top: 8px; }
 
 .reticle.ring {
@@ -430,10 +431,13 @@ section.sec { margin-bottom: 120px; }
   margin-right: auto;
 }
 .entry.inset .inset-card {
+  display: block;
   outline: 1px solid currentColor;
   background: var(--paper);
   position: relative;
   transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  color: inherit;
+  text-decoration: none;
 }
 .entry.inset .inset-card:hover { transform: translateY(-3px); }
 .entry.inset .inset-card .inset-banner {
@@ -485,6 +489,8 @@ section.sec { margin-bottom: 120px; }
   text-wrap: pretty;
 }
 .entry.inset .inset-body .caption b { font-weight: 500; }
+.entry.inset .inset-body .caption a { color: inherit; text-decoration: underline; text-underline-offset: 3px; transition: color .2s ease; }
+.entry.inset .inset-body .caption a:hover { color: var(--accent); }
 .entry.inset .inset-body .credits {
   font-family: var(--mono);
   font-size: 10.5px;
@@ -556,6 +562,8 @@ section.sec { margin-bottom: 120px; }
   text-wrap: pretty;
 }
 .text-card .caption b { font-weight: 500; }
+.text-card .caption a { color: inherit; text-decoration: underline; text-underline-offset: 3px; transition: color .2s ease; }
+.text-card .caption a:hover { color: var(--accent); }
 .text-card .credits {
   margin-top: auto;
   padding-top: 32px;
@@ -591,11 +599,11 @@ section.sec { margin-bottom: 120px; }
   content: "";
   position: absolute; inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 0 0 var(--accent);
+  box-shadow: inset 0 0 0 0 var(--ink);
   transition: box-shadow .3s ease;
 }
 .plate-wrap:hover .plate::after {
-  box-shadow: inset 0 0 0 2px var(--accent);
+  box-shadow: inset 0 0 32px 0 rgba(0,0,0,.18);
 }
 .plate-foot .fig-num { transition: color .25s ease, letter-spacing .35s ease; }
 .plate-foot {

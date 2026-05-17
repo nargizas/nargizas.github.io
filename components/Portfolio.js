@@ -40,33 +40,48 @@ function LedgerRow({ range, role, org, location, type, blurb, tags }) {
   );
 }
 
-function Entry({ idx, title, year, role, stack, status, location, caption, Plate, flip }) {
+function Entry({ idx, title, year, role, stack, status, location, caption, Plate, href }) {
+  const [hovered, setHovered] = useState(false);
+  const padded = String(idx).padStart(2, '0');
+  const Card = href ? 'a' : 'div';
+  const cardProps = href
+    ? { href, target: '_blank', rel: 'noopener noreferrer' }
+    : {};
+
   return (
-    <article className={'entry' + (flip ? ' flip' : '')}>
-      <div className="text-card">
-        <span className="index">№ {String(idx).padStart(2, '0')}</span>
-        <h3>{title}</h3>
-        <p className="caption" dangerouslySetInnerHTML={{ __html: caption }} />
-        <dl className="credits">
-          <dt>Year</dt>
-          <dd>{year}</dd>
-          <dt>Role</dt>
-          <dd>{role}</dd>
-          <dt>Stack</dt>
-          <dd>{stack}</dd>
-          <dt>Status</dt>
-          <dd style={{ color: status === 'Live' ? 'var(--accent)' : 'var(--ink-2)' }}>
-            {status}
-          </dd>
-        </dl>
-      </div>
-      <div className="plate-wrap">
-        <Plate />
-        <div className="plate-foot">
-          <span>{location}</span>
-          <span className="fig-num">Fig. {String(idx).padStart(2, '0')}</span>
+    <article className="entry inset">
+      <Card
+        className="inset-card"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        {...cardProps}
+      >
+        <div className="index-row">
+          <span>№ {padded} — {year}</span>
+          <b style={{ color: status === 'Live' ? 'var(--accent)' : 'var(--ink-2)' }}>{status}</b>
         </div>
-      </div>
+        <div className="inset-banner">
+          <div className="plate-wrap">
+            <Plate hovered={hovered} />
+          </div>
+          <div className="inset-banner-foot">
+            <span>{location}</span>
+            <span>Fig. {padded}</span>
+          </div>
+        </div>
+        <div className="inset-body">
+          <div>
+            <h3>{title}</h3>
+            <p className="caption" dangerouslySetInnerHTML={{ __html: caption }} />
+          </div>
+          <dl className="credits">
+            <dt>Role</dt>
+            <dd>{role}</dd>
+            <dt>Stack</dt>
+            <dd>{stack}</dd>
+          </dl>
+        </div>
+      </Card>
     </article>
   );
 }
@@ -137,22 +152,25 @@ export default function Portfolio() {
           <div className="sec-head">
             <span className="num">§ 01</span>
             <h2>Selected work</h2>
-            <span className="count">04 entries</span>
+            <span className="count">02 entries</span>
           </div>
 
           <Entry
+            inset
             idx={1}
             title="Visuo-haptic illusions, sampled."
-            year="2025 — ongoing"
+            year="2024"
             role="Research, code, write-up"
             stack="PyMC · NumPy · psychopy · matplotlib"
             status="Live"
             location="Lab notebook · Berlin"
-            caption={`A study of perception in the seam between sight and touch — running classical frequentist tests against <b>PyMC</b> posterior sampling on the same dataset and asking which story actually fits. Where MLE collapses ambiguity into a point estimate, Bayesian sampling preserves it; the difference is most of the paper. Field set-up uses a small haptic rig with a vibrotactile coil and a back-projected target.`}
+            href="https://github.com/nargizas/Bayesian-Psychometric-Fit"
+            caption={`Bayesian reanalysis of a VR perception study that asks how far you can push a mismatch between what a user sees and feels before they notice and the immersion breaks. That boundary was originally found by fitting the data to a curve and reading off the best single answer. The reanalysis runs the same 16-participant dataset through a <b>PyMC</b> probabilistic model: instead of one number per condition, you get a distribution of plausible answers.`}
             Plate={HapticPlate}
           />
 
           <Entry
+            inset
             idx={2}
             title="A practice site for an aesthetician."
             year="2024"
@@ -162,33 +180,8 @@ export default function Portfolio() {
             location="Client work · Munich"
             caption={`A small Webflow build for an independent skincare practice — soft type, generous white, a booking flow that fits inside one screen. The brief was simply: <b>look expensive without trying</b>. Most of the work happened in the spacing.`}
             Plate={BeautyPlate}
-            flip
           />
 
-          <Entry
-            idx={3}
-            title="Evaluation harness for retrieval agents."
-            year="2026 — incoming"
-            role="—"
-            stack="—"
-            status="In progress"
-            location="—"
-            caption={`A small framework for measuring the things that actually matter in a RAG system — answer faithfulness, citation grounding, latency under load — without the leaderboard theatre. Write-up forthcoming.`}
-            Plate={() => <IncomingPlate figNum={3} code="RAG-EVAL" />}
-          />
-
-          <Entry
-            idx={4}
-            title="A weather plate for a kitchen window."
-            year="2026 — incoming"
-            role="—"
-            stack="—"
-            status="In progress"
-            location="—"
-            caption={`A standalone display — e-paper, slow refresh, no chrome — that shows the next twelve hours of light, rain and wind for one window. An exercise in not making another dashboard.`}
-            Plate={() => <IncomingPlate figNum={4} code="W-PLATE" />}
-            flip
-          />
         </section>
 
         {/* ─── §02 Sketches ──────────────────────────── */}
