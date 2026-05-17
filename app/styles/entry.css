@@ -96,6 +96,14 @@
   color: var(--ink-2);
 }
 .entry.inset .index-row b { color: var(--ink); font-weight: 500; }
+.entry.inset .index-row .link-hint {
+  color: var(--ink-2);
+  transition: color .2s ease, letter-spacing .25s ease;
+}
+.entry.inset .inset-card:hover .link-hint {
+  color: var(--accent);
+  letter-spacing: .08em;
+}
 
 /* ── text card (standard layout) ── */
 .text-card {

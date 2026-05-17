@@ -12,6 +12,39 @@ export function HapticPlate({ hovered }) {
     else svg.pauseAnimations();
   }, [hovered]);
 
+  // Correct sphere projection: treat (i,j) as a point on a flat surface at arc-length
+  // distance r_flat = sqrt(i²+j²)·dPhi from the sphere's front-facing pole.
+  // Orthographic projection: x = R·sin(r_flat)·i/r_ij, y = R·sin(r_flat)·j/r_ij.
+  // This makes horizontal/vertical grid lines curve like a real sphere surface.
+  const cx = 200, cy = 230;
+  const R = 230;
+  const dPhi = 0.195;
+  const rMax = 7;
+  const sizeMin = 0.38; // floor for dot radius (0=full sphere intensity, 1=flat)
+
+  const dots = [];
+  for (let i = -11; i <= 11; i++) {
+    for (let j = -12; j <= 12; j++) {
+      const rIdx = Math.sqrt(i * i + j * j);
+      const rFlat = rIdx * dPhi;
+      if (rFlat >= Math.PI / 2) continue;
+
+      let x, y;
+      if (rIdx < 0.001) {
+        x = cx; y = cy;
+      } else {
+        const scale = R * Math.sin(rFlat) / rIdx;
+        x = cx + scale * i;
+        y = cy + scale * j;
+      }
+
+      const cosZ = Math.cos(rFlat);
+      const r = rMax * (sizeMin + (1 - sizeMin) * cosZ);
+      if (r < 0.6) continue;
+      dots.push({ x, y, r, rIdx });
+    }
+  }
+
   return (
     <div className="plate">
       <svg
@@ -20,55 +53,25 @@ export function HapticPlate({ hovered }) {
         preserveAspectRatio="xMidYMid slice"
         style={{ background: 'var(--accent)' }}
       >
-        <defs>
-          <radialGradient id="hp-glow" cx="50%" cy="55%" r="60%">
-            <stop offset="0%" stopColor="rgba(255,255,255,.18)" />
-            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-          </radialGradient>
-        </defs>
-        <rect width="400" height="460" fill="url(#hp-glow)" />
-        <g fill="none" stroke="rgba(255,255,255,.55)" strokeWidth="1">
-          {[0, 1, 2, 3].map((i) => (
-            <circle key={i} cx={70 + i * 87} cy={230} r={90}>
-              <animate
-                attributeName="r"
-                values="86;94;86"
-                dur={`${7 + i * 0.6}s`}
-                repeatCount="indefinite"
-              />
-            </circle>
-          ))}
-          {[0, 1, 2, 3].map((i) => (
-            <circle key={'b' + i} cx={70 + i * 87} cy={230} r={60} opacity=".4">
-              <animate
-                attributeName="r"
-                values="58;66;58"
-                dur={`${9 + i * 0.5}s`}
-                repeatCount="indefinite"
-              />
-            </circle>
-          ))}
+        {dots.map((d, i) => (
+          <circle key={i} cx={d.x.toFixed(1)} cy={d.y.toFixed(1)} r={d.r.toFixed(2)} fill="var(--paper)">
+            <animate
+              attributeName="r"
+              values={`${d.r.toFixed(2)};${(d.r * 1.28).toFixed(2)};${d.r.toFixed(2)}`}
+              dur="2.6s"
+              begin={`${(d.rIdx * 0.072).toFixed(3)}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        ))}
+        <g stroke="var(--ink-2)" strokeWidth="1" opacity=".4">
+          <line x1="12" y1="12" x2="22" y2="12" /><line x1="12" y1="12" x2="12" y2="22" />
+          <line x1="388" y1="12" x2="378" y2="12" /><line x1="388" y1="12" x2="388" y2="22" />
+          <line x1="12" y1="448" x2="22" y2="448" /><line x1="12" y1="448" x2="12" y2="438" />
+          <line x1="388" y1="448" x2="378" y2="448" /><line x1="388" y1="448" x2="388" y2="438" />
         </g>
-        <g stroke="rgba(255,255,255,.6)" strokeWidth="1">
-          <line x1="195" y1="230" x2="205" y2="230" />
-          <line x1="200" y1="225" x2="200" y2="235" />
-        </g>
-        <g stroke="rgba(255,255,255,.45)" strokeWidth="1">
-          <line x1="12" y1="12" x2="22" y2="12" />
-          <line x1="12" y1="12" x2="12" y2="22" />
-          <line x1="388" y1="12" x2="378" y2="12" />
-          <line x1="388" y1="12" x2="388" y2="22" />
-          <line x1="12" y1="448" x2="22" y2="448" />
-          <line x1="12" y1="448" x2="12" y2="438" />
-          <line x1="388" y1="448" x2="378" y2="448" />
-          <line x1="388" y1="448" x2="388" y2="438" />
-        </g>
-        <g
-          fontFamily="var(--mono)"
-          fontSize="9"
-          fill="rgba(255,255,255,.7)"
-          style={{ letterSpacing: '.06em', textTransform: 'uppercase' }}
-        >
+        <g fontFamily="var(--mono)" fontSize="9" fill="var(--ink-2)"
+          style={{ letterSpacing: '.06em', textTransform: 'uppercase' }}>
           <text x="14" y="32">Fig. 01 / Haptic field</text>
           <text x="14" y="450" textAnchor="start">d=0.42  σ=0.11</text>
           <text x="386" y="450" textAnchor="end">N=4000 samples</text>
@@ -80,39 +83,43 @@ export function HapticPlate({ hovered }) {
 
 export function BeautyPlate({ hovered }) {
   const playState = hovered ? 'running' : 'paused';
+  const pk = '#cd93a5';
+  const cx = 200, cy = 222;
+
+  const outerPetals = Array.from({ length: 8 }, (_, i) => {
+    const a = (i * 45) * Math.PI / 180;
+    return { x: cx + Math.sin(a) * 62, y: cy - Math.cos(a) * 62 };
+  });
+
+
   return (
     <div className="plate" style={{ background: 'var(--paper-2)' }}>
       <svg viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice">
-        <rect width="400" height="460" fill="var(--paper-2)" />
-        <g style={{ transformOrigin: '200px 230px', animation: `spin 60s linear infinite`, animationPlayState: playState }}>
-          <ellipse cx="200" cy="230" rx="150" ry="60" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".6" />
-          <ellipse cx="200" cy="230" rx="120" ry="48" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".5" />
-          <ellipse cx="200" cy="230" rx="90" ry="36" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".4" />
-          <ellipse cx="200" cy="230" rx="60" ry="24" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".3" />
+        <rect width="400" height="460" fill={pk} />
+
+        {/* Outer ring — 8 blob petals, slow spin */}
+        <g style={{ transformOrigin: `${cx}px ${cy}px`, animation: `spin 80s linear infinite`, animationPlayState: playState }}>
+          {outerPetals.map((p, i) => <circle key={i} cx={p.x} cy={p.y} r={26} fill={'var(--accent)'} />)}
         </g>
-        <g style={{ transformOrigin: '200px 230px', animation: `spin-rev 80s linear infinite`, animationPlayState: playState }}>
-          <ellipse cx="200" cy="230" rx="150" ry="60" transform="rotate(60 200 230)" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".4" />
-          <ellipse cx="200" cy="230" rx="120" ry="48" transform="rotate(60 200 230)" fill="none" stroke="var(--ink)" strokeWidth="1" opacity=".3" />
+
+        
+
+        {/* Centre disc + hole */}
+        <circle cx={cx} cy={cy} r={62} fill={'var(--accent)'} />
+        <circle cx={cx} cy={cy} r={22} fill={pk} />
+
+        {/* Corner marks */}
+        <g stroke={pk} strokeWidth="1" opacity=".35">
+          <line x1="12" y1="12" x2="22" y2="12" /><line x1="12" y1="12" x2="12" y2="22" />
+          <line x1="388" y1="12" x2="378" y2="12" /><line x1="388" y1="12" x2="388" y2="22" />
+          <line x1="12" y1="448" x2="22" y2="448" /><line x1="12" y1="448" x2="12" y2="438" />
+          <line x1="388" y1="448" x2="378" y2="448" /><line x1="388" y1="448" x2="388" y2="438" />
         </g>
-        <circle cx="200" cy="230" r="2.5" fill="var(--accent)" />
-        <g stroke="var(--ink)" strokeWidth="1" opacity=".7">
-          <line x1="12" y1="12" x2="22" y2="12" />
-          <line x1="12" y1="12" x2="12" y2="22" />
-          <line x1="388" y1="12" x2="378" y2="12" />
-          <line x1="388" y1="12" x2="388" y2="22" />
-          <line x1="12" y1="448" x2="22" y2="448" />
-          <line x1="12" y1="448" x2="12" y2="438" />
-          <line x1="388" y1="448" x2="378" y2="448" />
-          <line x1="388" y1="448" x2="388" y2="438" />
-        </g>
-        <g
-          fontFamily="var(--mono)"
-          fontSize="9"
-          fill="var(--ink-2)"
-          style={{ letterSpacing: '.06em', textTransform: 'uppercase' }}
-        >
+
+        <g fontFamily="var(--mono)" fontSize="9" fill={'var(--accent)'} opacity=".6"
+          style={{ letterSpacing: '.06em', textTransform: 'uppercase' }}>
           <text x="14" y="32">Fig. 02 / Form study</text>
-          <text x="386" y="450" textAnchor="end">CMYK 0 / 0 / 0 / 100</text>
+          <text x="386" y="450" textAnchor="end">Rosa · form</text>
         </g>
       </svg>
     </div>

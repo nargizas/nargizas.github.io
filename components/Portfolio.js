@@ -64,7 +64,10 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
       >
         <div className="index-row">
           <span>№ {padded} — {year}</span>
-          <b style={{ color: status === 'Live' ? 'var(--accent)' : 'var(--ink-2)' }}>{status}</b>
+          {href
+            ? <span className="link-hint">View ↗</span>
+            : <b style={{ color: status === 'Live' ? 'var(--accent)' : 'var(--ink-2)' }}>{status}</b>
+          }
         </div>
         <div className="inset-banner">
           <div className="plate-wrap">
