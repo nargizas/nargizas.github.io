@@ -331,19 +331,7 @@ section.sec { margin-bottom: 120px; }
   border-bottom: 1px solid currentColor;
   align-items: start;
   position: relative;
-  transition: padding-left .3s cubic-bezier(.2,.7,.2,1), background .2s ease;
 }
-.ledger-row::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 24px; bottom: 24px;
-  width: 0;
-  background: var(--accent);
-  transition: width .3s cubic-bezier(.2,.7,.2,1);
-}
-.ledger-row:hover { padding-left: 18px; }
-.ledger-row:hover::before { width: 3px; }
-.ledger-row:hover .l-role { color: var(--accent); }
 .ledger-row .l-range {
   font-family: var(--mono);
   font-size: 11px;
@@ -362,7 +350,7 @@ section.sec { margin-bottom: 120px; }
   line-height: 1.1;
   transition: color .25s ease;
 }
-.ledger-row .l-role { transition: color .25s ease; }
+.ledger-row .l-role { }
 .ledger-row .l-main .l-org {
   font-family: var(--sans);
   font-size: 15px;
@@ -379,6 +367,13 @@ section.sec { margin-bottom: 120px; }
   max-width: 56ch;
   text-wrap: pretty;
 }
+.ledger-row .l-main .l-blurb a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: inherit;
+  transition: color .2s ease;
+}
+.ledger-row .l-main .l-blurb a:hover { color: var(--accent); }
 .ledger-row .l-main .l-tags {
   display: flex;
   flex-wrap: wrap;
@@ -394,10 +389,6 @@ section.sec { margin-bottom: 120px; }
   border: 1px solid currentColor;
   padding: 3px 8px 2px;
   border-radius: 999px;
-  transition: color .25s ease, border-color .25s ease;
-}
-.ledger-row:hover .l-main .l-tags span {
-  color: var(--accent);
 }
 .ledger-row .l-meta {
   font-family: var(--mono);

@@ -280,31 +280,20 @@ export default function Portfolio() {
           </div>
           <div className="ledger">
             <LedgerRow
-              range="<b>2020</b> — 2022"
-              role="M.Sc. Computational Neuroscience"
-              org="Technische Universität Berlin"
-              location="Berlin"
-              type="Distinction"
-              blurb="Thesis: Bayesian models of visuo-haptic integration under conflict. Supervised by Prof. K. Reinhardt. Side modules in computer graphics and probabilistic programming."
-              tags={['Bayesian inference', 'Neuroscience', 'PyMC']}
+              range="<b>2023</b> — 2025"
+              role="M.Sc. Computer Science"
+              org="Georgia Tech"
+              location="Atlanta, GA"
+              blurb="Specialization in Machine Learning."
+              tags={['ML', 'SWE', 'Bayesian Statistics', 'Deep Learning', 'NLP', 'Game AI', 'Computer Graphics']}
             />
             <LedgerRow
-              range="<b>2016</b> — 2019"
+              range="<b>2019</b> — 2023"
               role="B.Sc. Computer Science"
-              org="University of Hamburg"
-              location="Hamburg"
-              type="1.3 / 1.0"
-              blurb="Concentration in machine learning and human-computer interaction. Bachelor project: a real-time visual sequencer for an installation at Reeperbahn Festival."
-              tags={['ML', 'HCI', 'C++', 'Three.js']}
-            />
-            <LedgerRow
-              range="2018"
-              role="Visiting student, Department of Design"
-              org="Aalto University"
-              location="Helsinki"
-              type="Exchange"
-              blurb="One semester across the bridge into design. Took typography, generative form, and a studio in interaction prototyping. Most of my visual instincts come from those four months."
-              tags={['Type', 'Generative form']}
+              org="KAIST"
+              location="Daejeon, South Korea"
+              blurb={<>Minor in Industrial Design. Graduation thesis:{' '}<a href="#" target="_blank" rel="noopener noreferrer">Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction{' '}↗</a></>}
+              tags={['ML', 'Deep Learning', 'HCI', 'VR', 'Design']}
             />
           </div>
         </section>
