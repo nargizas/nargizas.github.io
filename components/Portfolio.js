@@ -310,7 +310,7 @@ export default function Portfolio() {
               role="B.Sc. Computer Science"
               org="KAIST"
               location="Daejeon, South Korea"
-              blurb="Minor in Industrial Design. Graduation thesis"
+              blurb="Minor in Industrial Design."
               tags={['ML', 'Deep Learning', 'HCI', 'VR', 'Design']}
             />
           </div>

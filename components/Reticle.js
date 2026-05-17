@@ -25,7 +25,7 @@ export default function Reticle({ kind }) {
     function over(e) {
       const t = e.target;
       const hover =
-        t.closest && t.closest('a, button, .text-card, .inset-card, .sketch, .plate-wrap, .ledger-row');
+        t.closest && t.closest('a, button, .text-card, .inset-card, .sketch, .plate-wrap');
       setHot(!!hover);
     }
     window.addEventListener('mousemove', move);
