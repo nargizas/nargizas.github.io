@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Reticle from './Reticle';
-import { HapticPlate, BeautyPlate, IncomingPlate, SketchTile } from './Plates';
+import { HapticPlate, BeautyPlate, IncomingPlate } from './Plates';
 
 const TYPE_LABEL = 'Inter Tight / Geist Mono';
 
@@ -192,6 +192,7 @@ export default function Portfolio() {
         </section>
 
         {/* ─── §02 Sketches ──────────────────────────── */}
+        {/*
         <section id="sketches" className="sec">
           <div className="sec-head">
             <span className="num">§ 02</span>
@@ -221,6 +222,17 @@ export default function Portfolio() {
           >
             Most of these are p5 / d3 / svg one-pagers — code lives in a scratch repo, ask if
             you&apos;d like the source.
+          </p>
+        </section>
+        */}
+        <section id="sketches" className="sec">
+          <div className="sec-head">
+            <span className="num">§ 02</span>
+            <h2>Sketches &amp; experiments</h2>
+            <span className="count">— pending</span>
+          </div>
+          <p style={{ fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '.04em', textTransform: 'uppercase', color: 'var(--ink-2)', maxWidth: '62ch' }}>
+            Stitching this together — come back later.
           </p>
         </section>
 
