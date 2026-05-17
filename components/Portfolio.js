@@ -233,40 +233,46 @@ export default function Portfolio() {
           </div>
           <div className="ledger">
             <LedgerRow
-              range="<b>2024</b> — present"
-              role="Senior AI Engineer"
-              org="Independent / contract"
-              location="Berlin · remote"
-              type="Full-time"
-              blurb="Building retrieval-augmented systems, evaluation harnesses and the unglamorous plumbing between LLMs and production. Clients in fintech, health-tech and one stubborn cultural institution."
-              tags={['LLM', 'RAG', 'Evals', 'Python', 'TypeScript']}
-            />
-            <LedgerRow
-              range="<b>2022</b> — 2024"
-              role="Machine Learning Engineer"
-              org="Hyperion Labs"
-              location="Munich"
-              type="Full-time"
-              blurb="Owned the training pipeline for a vision-language model in a heavily-regulated domain. Most of the work was data: deduplication, labelling protocols, evals that survived a year of regression."
-              tags={['VLM', 'PyTorch', 'Triton', 'MLOps']}
-            />
-            <LedgerRow
-              range="<b>2020</b> — 2022"
-              role="Research Engineer"
-              org="Max-Planck Institute for Cognitive Sciences"
-              location="Leipzig"
-              type="Research"
-              blurb="Bayesian models of multisensory perception. Co-author on two papers; wrote most of the simulation code in PyMC and the figures in matplotlib."
-              tags={['PyMC', 'Bayesian', 'Psychophysics']}
-            />
-            <LedgerRow
-              range="<b>2019</b> — 2020"
-              role="Software Engineer, intern"
-              org="Kabuki Studio"
-              location="Berlin"
+              range="<b>2026</b> — present"
+              role="Software Engineer intern"
+              org="Seco Tools"
+              location="Erkrath, Germany"
               type="Internship"
-              blurb="Generative graphics for a small studio doing live visuals — TouchDesigner, GLSL shaders, and the occasional Webflow build. Where the creative-coding habit started."
-              tags={['TouchDesigner', 'GLSL', 'Webflow']}
+              blurb="Building VR factory tour for a cutting tools manufacturing company. Mixing 360° video with 3D assets, spatial audio, interactive hotspots."
+              tags={['VR', 'Unity', 'C#', 'Meta Quest', 'XR Interaction Toolkit']}
+            />
+            <LedgerRow
+              range="<b>2023</b> — 2024"
+              role="AI Engineer"
+              org="Sentience"
+              location="Seoul, South Korea"
+              type="Full-time"
+              blurb="Created AI opponent using deep reinforcement learning for South Pole Bebop PvPvE game. 
+              Built the training pipeline and evaluation harness, ran experiments on model architectures and reward shaping. Started as an intern."
+              tags={['Python', 'PyTorch', 'Ray RLlib', 'Reinforcement Learning', 'Game AI', 'Gymnasium', 'Unity', 'Go']}
+            />
+            <LedgerRow
+              range="<b>2023</b> — 2023"
+              role="Research Intern, Software Engineering"
+              org="COINSE Lab, Kaist"
+              location="Deajeon, South Korea"
+              type="Graduation thesis internship"
+              blurb={<>Worked on my graduation thesis:{' '}
+                <a href="https://dl.acm.org/doi/10.1109/TSE.2024.3450837" target="_blank" rel="noopener noreferrer">
+                  Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction{' '}↗</a></>}
+              tags={['Python', 'Hugging Face', 'OpenAI API', 'Code LLMs', 'Software Engineering']}
+            />
+            <LedgerRow
+              range="<b>2021</b> — 2022"
+              role="Research Intern, HCI"
+              org="Make Lab, KAIST"
+              location="Daejeon, South Korea"
+              type="Internship"
+              blurb={<>Explored visuo-haptic illusions in VR. Published at IASDR 2023:
+                {' '}<a href="https://dl.designresearchsociety.org/iasdr/iasdr2023/fullpapers/164/"
+                  target="_blank" rel="noopener noreferrer">
+                  Designing visuo-haptic illusions for Virtual Reality applications using floor-based shape-changing displays{' '}↗</a></>}
+              tags={['VR', 'HCI', 'Unity', 'C#']}
             />
           </div>
         </section>
@@ -292,7 +298,7 @@ export default function Portfolio() {
               role="B.Sc. Computer Science"
               org="KAIST"
               location="Daejeon, South Korea"
-              blurb={<>Minor in Industrial Design. Graduation thesis:{' '}<a href="#" target="_blank" rel="noopener noreferrer">Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction{' '}↗</a></>}
+              blurb="Minor in Industrial Design. Graduation thesis"
               tags={['ML', 'Deep Learning', 'HCI', 'VR', 'Design']}
             />
           </div>
