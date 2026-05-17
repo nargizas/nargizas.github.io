@@ -318,14 +318,13 @@ export default function Portfolio() {
           </div>
           <div className="colophon">
             <div className="col">
-              <h3>
-                Available
+              <h4>
+                Availability
                 <br />
-                <span className="accent">Q3 2026.</span>
-              </h3>
+                <span className="accent"></span>
+              </h4>
               <p>
-                Open to small, well-scoped engagements — production LLM work, evaluation, or the
-                rare creative-coding brief that pays for itself. Slow inboxes, same-week replies.
+                Open to small, well-scoped engagements.
               </p>
             </div>
 
@@ -333,7 +332,7 @@ export default function Portfolio() {
               <h4>Reach me</h4>
               <ul>
                 <li>
-                  <a href="mailto:hello@nargiz.studio">hello@nargiz.studio</a>
+                  <a href="mailto:hello@nargiz.studio">nargizaskarbekkyzy@gmail.com</a>
                 </li>
                 <li>
                   <a href="https://github.com/nargizas" target="_blank" rel="noopener noreferrer">
@@ -355,19 +354,17 @@ export default function Portfolio() {
             <div className="col">
               <h4>Currently</h4>
               <ul>
-                <li>Reading — Pearl, <em>Causality</em></li>
-                <li>Listening — Tim Hecker</li>
-                <li>Drinking — Gesha, washed</li>
-                <li>Sitting in — Berlin</li>
+                <li>Reading — Stories of Your Life and Others, Ted Chiang</li>
+                <li>Listening — Heavy Serenade, NMIXX</li>
+                <li>Sitting in — Dortmund, DE</li>
               </ul>
             </div>
           </div>
 
           <footer className="foot">
-            <div>© Nargiz A. — MMXXVI</div>
-            <div className="center">Hand-set in {TYPE_LABEL}</div>
+            <div>© Nargiz A. — 2026</div>
             <div className="right">
-              № 0001 / Edition of <b>∞</b>
+              № 0002 / Edition of <b>∞</b>
             </div>
           </footer>
         </section>
