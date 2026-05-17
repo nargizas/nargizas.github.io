@@ -131,21 +131,19 @@ export default function Portfolio() {
             <div>
               {timeStr}
               {timeStr && ' · '}
-              52.5200° N, 13.4050° E
+              51.5136° N, 7.4653° E
             </div>
             <div style={{ marginTop: 8, color: 'var(--accent)' }}>
               <span className="live-dot" />
-              Available — Q3 2026
+              Available
             </div>
           </div>
         </header>
 
         <div className="sub">
+          <h3>Human × Machine × Perception.</h3>
           <p className="lead">
-            I build with language models and the systems around them — retrieval, evaluation, the
-            slow plumbing that turns a demo into a product. On weekends I write code that draws —
-            visuo-haptic experiments, small generative things, the occasional Webflow build for
-            friends. This is a working catalogue.
+            I build AI and build with AI. My work explores how people interact with, understand, and experience intelligent systems.
           </p>
           <nav>
             <a href="#work">§ Work</a>

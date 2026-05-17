@@ -19,7 +19,7 @@ export const WORK_ENTRIES = [
     Plate: HapticPlate,
   },
   {
-    title: 'A medical website for an aesthetician.',
+    title: 'A professional website for a medical aesthetician.',
     year: '2026',
     role: 'Design, Development, deployment',
     stack: 'Webflow',
