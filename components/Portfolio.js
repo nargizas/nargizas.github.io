@@ -2,9 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import Reticle from './Reticle';
-import { HapticPlate, BeautyPlate, IncomingPlate } from './Plates';
 
-const TYPE_LABEL = 'Inter Tight / Geist Mono';
+import { WORK_ENTRIES } from '../data/projects';
+import { EXPERIENCE_ENTRIES } from '../data/experience';
+import { EDUCATION_ENTRIES } from '../data/education';
+
+const SECTIONS = ['work', 'sketches', 'experience', 'education', 'contact'];
+const secNum = (id) => `§ ${String(SECTIONS.indexOf(id) + 1).padStart(2, '0')}`;
+const fmt = (n, label = 'entries') => `${String(n).padStart(2, '0')} ${label}`;
+
 
 function useLiveClock() {
   const [now, setNow] = useState(null);
@@ -150,79 +156,21 @@ export default function Portfolio() {
         {/* ─── §01 Selected work ─────────────────────── */}
         <section id="work" className="sec">
           <div className="sec-head">
-            <span className="num">§ 01</span>
+            <span className="num">{secNum('work')}</span>
             <h2>Selected work</h2>
-            <span className="count">02 entries</span>
+            <span className="count">{fmt(WORK_ENTRIES.length)}</span>
           </div>
-
           <div className="work-grid">
-            <Entry
-              inset
-              idx={1}
-              title="Visuo-haptic illusions, sampled."
-              year="2024"
-              role="Research, code, write-up"
-              stack="PyMC · NumPy · psychopy · matplotlib"
-              status="Live"
-              location="Lab notebook · Berlin"
-              href="https://github.com/nargizas/Bayesian-Psychometric-Fit"
-              caption={`Bayesian reanalysis of a VR perception study that asks how far you can push a mismatch between what a user sees and feels before they notice and the immersion breaks. That boundary was originally found by fitting the data to a curve and reading off the best single answer. The reanalysis runs the same 16-participant dataset through a <b>PyMC</b> probabilistic model: instead of one number per condition, you get a distribution of plausible answers.`}
-              Plate={HapticPlate}
-            />
-
-            <Entry
-              inset
-              idx={2}
-              title="A practice site for an aesthetician."
-              year="2024"
-              role="Design, Webflow build, copy"
-              stack="Webflow · GSAP · Cloudinary"
-              status="Live"
-              location="Client work · Munich"
-              caption={`A small Webflow build for an independent skincare practice — soft type, generous white, a booking flow that fits inside one screen. The brief was simply: <b>look expensive without trying</b>. Most of the work happened in the spacing.`}
-              Plate={BeautyPlate}
-            />
+            {WORK_ENTRIES.map((e, i) => (
+              <Entry key={i} idx={i + 1} {...e} />
+            ))}
           </div>
-
         </section>
 
         {/* ─── §02 Sketches ──────────────────────────── */}
-        {/*
         <section id="sketches" className="sec">
           <div className="sec-head">
-            <span className="num">§ 02</span>
-            <h2>Sketches &amp; experiments</h2>
-            <span className="count">08 plates</span>
-          </div>
-          <div className="sketches">
-            <SketchTile idx={1} title="Posterior, 8000 draws" kind="dot" />
-            <SketchTile idx={2} title="Concentric, breathing" kind="rings" />
-            <SketchTile idx={3} title="Cell, magic squares" kind="cells" />
-            <SketchTile idx={4} title="Signal, grain" kind="noise" />
-            <SketchTile idx={5} title="Field, blue" kind="field" />
-            <SketchTile idx={6} title="Type, single glyph" kind="type" />
-            <SketchTile idx={7} title="Posterior density" kind="graph" />
-            <SketchTile idx={8} title="Strands, 24 of them" kind="lines" />
-          </div>
-          <p
-            style={{
-              fontFamily: 'var(--mono)',
-              fontSize: 11,
-              letterSpacing: '.04em',
-              textTransform: 'uppercase',
-              color: 'var(--ink-2)',
-              marginTop: 28,
-              maxWidth: '62ch',
-            }}
-          >
-            Most of these are p5 / d3 / svg one-pagers — code lives in a scratch repo, ask if
-            you&apos;d like the source.
-          </p>
-        </section>
-        */}
-        <section id="sketches" className="sec">
-          <div className="sec-head">
-            <span className="num">§ 02</span>
+            <span className="num">{secNum('sketches')}</span>
             <h2>Sketches &amp; experiments</h2>
             <span className="count">— pending</span>
           </div>
@@ -234,87 +182,35 @@ export default function Portfolio() {
         {/* ─── §03 Experience ───────────────────────── */}
         <section id="experience" className="sec">
           <div className="sec-head">
-            <span className="num">§ 03</span>
+            <span className="num">{secNum('experience')}</span>
             <h2>Experience</h2>
-            <span className="count">04 posts</span>
+            <span className="count">{fmt(EXPERIENCE_ENTRIES.length, 'posts')}</span>
           </div>
           <div className="ledger">
-            <LedgerRow
-              range="<b>2026</b> — present"
-              role="Software Engineer intern"
-              org="Seco Tools"
-              location="Erkrath, Germany"
-              type="Internship"
-              blurb="Building VR factory tour for a cutting tools manufacturing company. Mixing 360° video with 3D assets, spatial audio, interactive hotspots."
-              tags={['VR', 'Unity', 'C#', 'Meta Quest', 'XR Interaction Toolkit']}
-            />
-            <LedgerRow
-              range="<b>2023</b> — 2024"
-              role="AI Engineer"
-              org="Sentience"
-              location="Seoul, South Korea"
-              type="Full-time"
-              blurb="Created AI opponent using deep reinforcement learning for South Pole Bebop PvPvE game. 
-              Built the training pipeline and evaluation harness, ran experiments on model architectures and reward shaping. Started as an intern."
-              tags={['Python', 'PyTorch', 'Ray RLlib', 'Reinforcement Learning', 'Game AI', 'Gymnasium', 'Unity', 'Go']}
-            />
-            <LedgerRow
-              range="<b>2023</b> — 2023"
-              role="Research Intern, Software Engineering"
-              org="COINSE Lab, Kaist"
-              location="Deajeon, South Korea"
-              type="Graduation thesis internship"
-              blurb={<>Worked on my graduation thesis:{' '}
-                <a href="https://dl.acm.org/doi/10.1109/TSE.2024.3450837" target="_blank" rel="noopener noreferrer">
-                  Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction{' '}↗</a></>}
-              tags={['Python', 'Hugging Face', 'OpenAI API', 'Code LLMs', 'Software Engineering']}
-            />
-            <LedgerRow
-              range="<b>2021</b> — 2022"
-              role="Research Intern, HCI"
-              org="Make Lab, KAIST"
-              location="Daejeon, South Korea"
-              type="Internship"
-              blurb={<>Explored visuo-haptic illusions in VR. Published at IASDR 2023:
-                {' '}<a href="https://dl.designresearchsociety.org/iasdr/iasdr2023/fullpapers/164/"
-                  target="_blank" rel="noopener noreferrer">
-                  Designing visuo-haptic illusions for Virtual Reality applications using floor-based shape-changing displays{' '}↗</a></>}
-              tags={['VR', 'HCI', 'Unity', 'C#']}
-            />
+            {EXPERIENCE_ENTRIES.map((e, i) => (
+              <LedgerRow key={i} {...e} />
+            ))}
           </div>
         </section>
 
         {/* ─── §04 Education ────────────────────────── */}
         <section id="education" className="sec">
           <div className="sec-head">
-            <span className="num">§ 04</span>
+            <span className="num">{secNum('education')}</span>
             <h2>Education</h2>
-            <span className="count">03 entries</span>
+            <span className="count">{fmt(EDUCATION_ENTRIES.length)}</span>
           </div>
           <div className="ledger">
-            <LedgerRow
-              range="<b>2023</b> — 2025"
-              role="M.Sc. Computer Science"
-              org="Georgia Tech"
-              location="Atlanta, GA"
-              blurb="Specialization in Machine Learning."
-              tags={['ML', 'SWE', 'Bayesian Statistics', 'Deep Learning', 'NLP', 'Game AI', 'Computer Graphics']}
-            />
-            <LedgerRow
-              range="<b>2019</b> — 2023"
-              role="B.Sc. Computer Science"
-              org="KAIST"
-              location="Daejeon, South Korea"
-              blurb="Minor in Industrial Design."
-              tags={['ML', 'Deep Learning', 'HCI', 'VR', 'Design']}
-            />
+            {EDUCATION_ENTRIES.map((e, i) => (
+              <LedgerRow key={i} {...e} />
+            ))}
           </div>
         </section>
 
         {/* ─── §05 Contact ───────────────────────────── */}
         <section id="contact" className="sec" style={{ marginBottom: 0 }}>
           <div className="sec-head">
-            <span className="num">§ 05</span>
+            <span className="num">{secNum('contact')}</span>
             <h2>Get in touch</h2>
             <span className="count">colophon</span>
           </div>
