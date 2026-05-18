@@ -1,39 +1,32 @@
-/* ── base ── */
-.entry {
-  margin-bottom: var(--row-gap);
-}
-
-/* ── inset card layout (default) ── */
-.entry.inset {
-  display: block;
-  margin-bottom: 0;
-}
-.entry.inset .inset-card {
+.inset-card {
   display: flex;
   flex-direction: column;
   height: 100%;
   outline: 1px solid currentColor;
-  background: var(--paper);
+  background: var(--paper-2);
   position: relative;
   transition: transform .35s cubic-bezier(.2,.7,.2,1);
   color: inherit;
   text-decoration: none;
 }
-.entry.inset .inset-card:hover { transform: translateY(-3px); }
-.entry.inset .inset-card .inset-banner {
+.inset-card:hover { transform: translateY(-3px); }
+
+.inset-banner {
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-bottom: 1px solid currentColor;
   position: relative;
 }
-.entry.inset .inset-card .inset-banner > .plate-wrap,
-.entry.inset .inset-card .inset-banner > .plate { width: 100%; height: 100%; }
-.entry.inset .inset-card .inset-banner .plate { outline: none; height: 100%; }
-.entry.inset .inset-banner-foot {
+.inset-banner > .plate-wrap,
+.inset-banner > .plate { width: 100%; height: 100%; }
+.inset-banner > .plate { outline: none; }
+
+.inset-banner-foot {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  display: flex; justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
   padding: 8px 12px;
   font-family: var(--mono);
   font-size: 10.5px;
@@ -44,49 +37,10 @@
   pointer-events: none;
 }
 .inset-banner-foot span { white-space: nowrap; }
-.entry.inset .inset-body {
-  flex: 1;
-  padding: 22px 22px 24px;
-  display: grid;
-  grid-template-columns: 1fr minmax(180px, 260px);
-  gap: 32px;
-  align-items: start;
-}
-.entry.inset .inset-body h3 {
-  margin: 0 0 14px;
-  font-family: var(--sans);
-  font-weight: 500;
-  font-size: clamp(26px, 2.2vw, 36px);
-  line-height: 1;
-  letter-spacing: -.025em;
-  color: var(--accent);
-}
-.entry.inset .inset-body .caption {
-  font-family: var(--sans);
-  font-size: var(--caption-size);
-  line-height: var(--caption-lh);
-  color: var(--ink);
-  max-width: 48ch;
-  text-wrap: pretty;
-}
-.entry.inset .inset-body .caption b { font-weight: 500; }
-.entry.inset .inset-body .caption a { color: inherit; text-decoration: underline; text-underline-offset: 3px; transition: color .2s ease; }
-.entry.inset .inset-body .caption a:hover { color: var(--accent); }
-.entry.inset .inset-body .credits {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 12px;
-  row-gap: 4px;
-}
-.entry.inset .inset-body .credits dt { color: var(--ink-2); }
-.entry.inset .inset-body .credits dd { margin: 0; color: var(--ink); }
-.entry.inset .index-row {
-  display: flex; justify-content: space-between;
+
+.index-row {
+  display: flex;
+  justify-content: space-between;
   padding: 10px 16px;
   border-bottom: 1px solid currentColor;
   font-family: var(--mono);
@@ -95,78 +49,59 @@
   text-transform: uppercase;
   color: var(--ink-2);
 }
-.entry.inset .index-row b { color: var(--ink); font-weight: 500; }
-.entry.inset .index-row .link-hint {
+.index-row b { color: var(--ink-2); font-weight: 500; }
+.index-row b[data-status="Live"] { color: var(--accent); }
+.index-row .link-hint {
   color: var(--ink-2);
   transition: color .2s ease, letter-spacing .25s ease;
 }
-.entry.inset .inset-card:hover .link-hint {
+.inset-card:hover .link-hint {
   color: var(--accent);
   letter-spacing: .08em;
 }
 
-/* ── text card (standard layout) ── */
-.text-card {
-  background: var(--paper);
-  outline: 1px solid currentColor;
+.inset-body {
+  flex: 1;
   padding: 22px 22px 24px;
-  position: relative;
-  min-height: var(--plate-h);
-  display: flex;
-  flex-direction: column;
-  transition: transform .35s cubic-bezier(.2,.7,.2,1), background .25s ease;
+  display: grid;
+  grid-template-columns: 1fr minmax(180px, 260px);
+  gap: 32px;
+  align-items: start;
 }
-.text-card:hover { background: var(--paper); transform: translateY(-2px); }
-.text-card:hover h3 { letter-spacing: -.022em; }
-.text-card:hover .index { color: var(--accent); }
-.text-card .index { transition: color .2s ease; }
-.text-card h3 { transition: letter-spacing .35s ease; }
-.text-card .index {
-  position: absolute;
-  top: 22px; right: 22px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .04em;
-  color: var(--ink-2);
-}
-.text-card h3 {
-  margin: 0 0 18px;
+.inset-body h3 {
+  margin: 0 0 14px;
   font-family: var(--sans);
   font-weight: 500;
-  font-size: clamp(28px, 2.4vw, 40px);
-  line-height: .98;
+  font-size: clamp(26px, 2.2vw, 36px);
+  line-height: 1;
   letter-spacing: -.025em;
   color: var(--accent);
-  max-width: 90%;
 }
-.text-card .caption {
+.inset-body .caption {
   font-family: var(--sans);
-  font-weight: 400;
   font-size: var(--caption-size);
   line-height: var(--caption-lh);
   color: var(--ink);
-  max-width: 38ch;
+  max-width: 48ch;
   text-wrap: pretty;
 }
-.text-card .caption b { font-weight: 500; }
-.text-card .caption a { color: inherit; text-decoration: underline; text-underline-offset: 3px; transition: color .2s ease; }
-.text-card .caption a:hover { color: var(--accent); }
-.text-card .credits {
-  margin-top: auto;
-  padding-top: 32px;
+.inset-body .caption b { font-weight: 500; }
+.inset-body .caption a { color: inherit; text-decoration: underline; text-underline-offset: 3px; transition: color .2s ease; }
+.inset-body .caption a:hover { color: var(--accent); }
+
+.credits {
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--ink-2);
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: 14px;
+  column-gap: 12px;
   row-gap: 4px;
 }
-.text-card .credits dt { color: var(--ink-2); }
-.text-card .credits dd { margin: 0; color: var(--ink); }
+.credits dt { color: var(--ink-2); }
+.credits dd { margin: 0; color: var(--ink); }
 
 @media (max-width: 720px) {
-  .entry.inset .inset-body { grid-template-columns: 1fr; gap: 18px; }
+  .inset-body { grid-template-columns: 1fr; gap: 18px; }
 }

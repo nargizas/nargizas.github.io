@@ -50,9 +50,7 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
   const [hovered, setHovered] = useState(false);
   const padded = String(idx).padStart(2, '0');
   const Card = href ? 'a' : 'div';
-  const cardProps = href
-    ? { href, target: '_blank', rel: 'noopener noreferrer' }
-    : {};
+  const cardProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
 
   return (
     <article className="entry inset">
@@ -66,13 +64,11 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
           <span>№ {padded} — {year}</span>
           {href
             ? <span className="link-hint">View ↗</span>
-            : <b style={{ color: status === 'Live' ? 'var(--accent)' : 'var(--ink-2)' }}>{status}</b>
+            : <b data-status={status}>{status}</b>
           }
         </div>
         <div className="inset-banner">
-          <div className="plate-wrap">
-            <Plate hovered={hovered} />
-          </div>
+          <div className="plate-wrap"><Plate hovered={hovered} /></div>
           <div className="inset-banner-foot">
             <span>{location}</span>
             <span>Fig. {padded}</span>
@@ -84,10 +80,8 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
             <p className="caption" dangerouslySetInnerHTML={{ __html: caption }} />
           </div>
           <dl className="credits">
-            <dt>Role</dt>
-            <dd>{role}</dd>
-            <dt>Stack</dt>
-            <dd>{stack}</dd>
+            <dt>Role</dt><dd>{role}</dd>
+            <dt>Stack</dt><dd>{stack}</dd>
           </dl>
         </div>
       </Card>
@@ -98,16 +92,6 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
 export default function Portfolio() {
   const now = useLiveClock();
 
-  const dateStr = now
-    ? now
-        .toLocaleDateString('en-GB', {
-          weekday: 'short',
-          day: '2-digit',
-          month: 'short',
-          year: 'numeric',
-        })
-        .toUpperCase()
-    : '';
   const timeStr = now
     ? now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
     : '';
@@ -118,41 +102,37 @@ export default function Portfolio() {
       <div className="shell">
         {/* ─── Masthead ─────────────────────────────── */}
         <header className="mast">
+          <span className="mast-tagline">Human × Machine × Perception.</span>
+          <div className="nav-strip">
+            <nav>
+              <a href="#work">§ Work</a>
+              <a href="#sketches">§ Sketches</a>
+              <a href="#experience">§ Experience</a>
+              <a href="#education">§ Education</a>
+              <a href="#contact">§ Contact</a>
+            </nav>
+          </div>
+        </header>
+
+        <div className='sub'>
           <h1>
             Nargiz A.<span className="accent">,</span>
             <br />
             AI Engineer<span className="accent">.</span>
           </h1>
-          <div className="meta">
-            <div>
-              <b>Index №&nbsp;01</b> · Ed. 2026
-            </div>
-            {now && <div>{dateStr}</div>}
-            <div>
-              {timeStr}
-              {timeStr && ' · '}
-              51.5136° N, 7.4653° E
-            </div>
-            <div style={{ marginTop: 8, color: 'var(--accent)' }}>
-              <span className="live-dot" />
-              Available
-            </div>
+          <div className="mast-right">
+              {timeStr && <span className="mast-time">{timeStr}</span>}
+              <span className="mast-avail">
+                <span className="live-dot" />
+                Available Q3 2026
+              </span>
           </div>
-        </header>
-
-        <div className="sub">
-          <h3>Human × Machine × Perception.</h3>
-          <p className="lead">
-            I build AI and build with AI. My work explores how people interact with, understand, and experience intelligent systems.
-          </p>
-          <nav>
-            <a href="#work">§ Work</a>
-            <a href="#sketches">§ Sketches</a>
-            <a href="#experience">§ Experience</a>
-            <a href="#education">§ Education</a>
-            <a href="#contact">§ Contact</a>
-          </nav>
         </div>
+        
+
+        <p className="lead">
+          I build AI and build with AI. My work explores how people interact with, understand, and experience intelligent systems.
+        </p>
 
         {/* ─── §01 Selected work ─────────────────────── */}
         <section id="work" className="sec">
