@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Reticle from './Reticle';
 
 import { WORK_ENTRIES } from '../data/projects';
@@ -91,6 +91,18 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
 
 export default function Portfolio() {
   const now = useLiveClock();
+  const subRef = useRef(null);
+  const [nameVisible, setNameVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (subRef.current) {
+        setNameVisible(subRef.current.getBoundingClientRect().bottom < 60);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const timeStr = now
     ? now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
@@ -103,18 +115,19 @@ export default function Portfolio() {
         {/* ─── Masthead ─────────────────────────────── */}
         <header className="mast">
           <span className="mast-tagline">Human × Machine × Perception.</span>
+          <span className={`mast-name${nameVisible ? ' mast-name--visible' : ''}`}>Nargiz A.</span>
           <div className="nav-strip">
             <nav>
-              <a href="#work">§ Work</a>
-              <a href="#sketches">§ Sketches</a>
-              <a href="#experience">§ Experience</a>
-              <a href="#education">§ Education</a>
-              <a href="#contact">§ Contact</a>
+              <a href="#work">Work</a>
+              <a href="#sketches">Sketches</a>
+              <a href="#experience">Experience</a>
+              <a href="#education">Education</a>
+              <a href="#contact">Contact</a>
             </nav>
           </div>
         </header>
 
-        <div className='sub'>
+        <div className='sub' ref={subRef}>
           <h1>
             Nargiz A.<span className="accent">,</span>
             <br />

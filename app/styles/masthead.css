@@ -5,6 +5,40 @@ header.mast {
   border-bottom: 1px solid currentColor;
   padding: 10px 0;
   margin-bottom: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  margin-left: calc(-1 * var(--gutter));
+  margin-right: calc(-1 * var(--gutter));
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.mast-name {
+  position: absolute;
+  right: var(--gutter);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+@media (min-width: 881px) {
+  .mast-name {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.mast-name--visible {
+  opacity: 1;
 }
 
 .mast-tagline {
@@ -121,5 +155,5 @@ header.mast {
   .sub h1 { font-size: clamp(48px, 12vw, 100px); }
   .sub { align-items: flex-start; flex-direction: column; gap: 16px; }
   .mast-right { align-items: flex-start; }
-  .nav-strip nav { justify-content: flex-start; }
+  .nav-strip { display: none; }
 }
