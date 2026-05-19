@@ -1,0 +1,11 @@
+.shell {
+  padding: 32px var(--gutter) 96px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+.rule {
+  height: 1px;
+  background: currentColor;
+  opacity: .9;
+}
+.rule.thin { opacity: .25; }
