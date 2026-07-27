@@ -83,7 +83,7 @@ export function HapticPlate({ hovered }) {
 
 export function BeautyPlate({ hovered }) {
   const playState = hovered ? 'running' : 'paused';
-  const pk = '#cd93a5';
+  const pk = 'var(--paper-2)';
   const cx = 200, cy = 222;
 
   const outerPetals = Array.from({ length: 8 }, (_, i) => {
