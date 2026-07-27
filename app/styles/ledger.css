@@ -1,12 +1,13 @@
 .ledger {
-  border-top: 1px solid currentColor;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 }
 .ledger-row {
   display: grid;
   grid-template-columns: 180px 1fr 160px;
   gap: 32px;
-  padding: 24px 0;
-  border-bottom: 1px solid currentColor;
+  padding: 8px 0;
   align-items: start;
   position: relative;
 }
@@ -62,7 +63,7 @@
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--ink-2);
-  border: 1px solid currentColor;
+  border: 1px solid var(--ink-2);
   padding: 3px 8px 2px;
   border-radius: 999px;
 }

@@ -26,7 +26,7 @@ export default function Reticle({ kind }) {
     function over(e) {
       const t = e.target;
       const plate = t.closest && t.closest('.plate-wrap');
-      const clickable = t.closest && t.closest('a, button, .text-card, .inset-card, .sketch');
+      const clickable = t.closest && t.closest('a, button, [role="button"], input, textarea');
       setOnPlate(!!plate);
       setHot(!!clickable);
     }

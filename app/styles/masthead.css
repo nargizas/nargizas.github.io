@@ -123,6 +123,7 @@ header.mast {
   display: flex;
   gap: 24px;
   justify-content: flex-end;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -131,6 +132,7 @@ header.mast {
   padding-bottom: 2px;
   white-space: nowrap;
   color: var(--ink-2);
+  line-height: 1;
 }
 
 .nav-strip nav a::after {
@@ -141,6 +143,30 @@ header.mast {
 
 .nav-strip nav a:hover::after { transform: scaleX(1); }
 
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--ink-2);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  transition: all .25s ease;
+  margin-left: 8px;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--paper-2);
+}
+
 .lead {
   font-family: var(--sans);
   font-size: clamp(15px, 1.15vw, 17px);
@@ -148,7 +174,7 @@ header.mast {
   letter-spacing: -.005em;
   color: var(--ink);
   max-width: 62ch;
-  padding: 32px 0 80px;
+  padding: 28px 0 64px;
 }
 
 @media (max-width: 880px) {

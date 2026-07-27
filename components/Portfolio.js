@@ -6,21 +6,12 @@ import Reticle from './Reticle';
 import { WORK_ENTRIES } from '../data/projects';
 import { EXPERIENCE_ENTRIES } from '../data/experience';
 import { EDUCATION_ENTRIES } from '../data/education';
+import { HONORS_ENTRIES } from '../data/honors';
+import { INTERESTS_ENTRIES } from '../data/interests';
 
-const SECTIONS = ['work', 'sketches', 'experience', 'education', 'contact'];
+const SECTIONS = ['work', 'sketches', 'experience', 'education', 'honors', 'interests', 'contact'];
 const secNum = (id) => `§ ${String(SECTIONS.indexOf(id) + 1).padStart(2, '0')}`;
 const fmt = (n, label = 'entries') => `${String(n).padStart(2, '0')} ${label}`;
-
-
-function useLiveClock() {
-  const [now, setNow] = useState(null);
-  useEffect(() => {
-    setNow(new Date());
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  return now;
-}
 
 function LedgerRow({ range, role, org, location, type, blurb, tags }) {
   return (
@@ -63,7 +54,7 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
         <div className="index-row">
           <span>№ {padded} — {year}</span>
           {href
-            ? <span className="link-hint">View ↗</span>
+            ? <span className="link-hint">View <span className="link-arrow">↗</span></span>
             : <b data-status={status}>{status}</b>
           }
         </div>
@@ -90,9 +81,20 @@ function Entry({ idx, title, year, role, stack, status, location, caption, Plate
 }
 
 export default function Portfolio() {
-  const now = useLiveClock();
   const subRef = useRef(null);
   const [nameVisible, setNameVisible] = useState(false);
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const currentMode = document.documentElement.dataset.mode || 'light';
+    setTheme(currentMode);
+  }, []);
+
+  const toggleTheme = () => {
+    const nextMode = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.mode = nextMode;
+    setTheme(nextMode);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -104,17 +106,13 @@ export default function Portfolio() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const timeStr = now
-    ? now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-    : '';
-
   return (
     <>
       <Reticle kind="dot" />
       <div className="shell">
         {/* ─── Masthead ─────────────────────────────── */}
         <header className="mast">
-          <span className="mast-tagline">Human × Machine × Perception.</span>
+          <span className="mast-tagline">Human × Machine × Perception</span>
           <span className={`mast-name${nameVisible ? ' mast-name--visible' : ''}`}>Nargiz A.</span>
           <div className="nav-strip">
             <nav>
@@ -122,7 +120,12 @@ export default function Portfolio() {
               <a href="#sketches">Sketches</a>
               <a href="#experience">Experience</a>
               <a href="#education">Education</a>
+              {/* <a href="#honors">Honors</a>
+              <a href="#interests">Interests</a> */}
               <a href="#contact">Contact</a>
+              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme mode">
+                {theme === 'dark' ? '☀ Day' : '☾ Night'}
+              </button>
             </nav>
           </div>
         </header>
@@ -133,15 +136,8 @@ export default function Portfolio() {
             <br />
             AI Engineer<span className="accent">.</span>
           </h1>
-          <div className="mast-right">
-              {timeStr && <span className="mast-time">{timeStr}</span>}
-              <span className="mast-avail">
-                <span className="live-dot" />
-                Available Q3 2026
-              </span>
-          </div>
         </div>
-        
+
 
         <p className="lead">
           I build AI and build with AI. My work explores how people interact with, understand, and experience intelligent systems.
@@ -201,12 +197,57 @@ export default function Portfolio() {
           </div>
         </section>
 
+        {/* ─── §05 Honors ───────────────────────────── */}
+        {/* <section id="honors" className="sec">
+          <div className="sec-head">
+            <span className="num">{secNum('honors')}</span>
+            <h2>Honors</h2>
+            <span className="count">{fmt(HONORS_ENTRIES.length, 'awards')}</span>
+          </div>
+          <div className="ledger">
+            {HONORS_ENTRIES.map((e, i) => (
+              <div key={i} className="ledger-row">
+                <div className="l-range"><b>{e.year}</b></div>
+                <div className="l-main">
+                  <h4 className="l-role">{e.title}</h4>
+                  {e.org && <p className="l-org">{e.org}</p>}
+                  {e.description && (
+                    <p className="l-blurb">
+                      {e.href
+                        ? <a href={e.href} target="_blank" rel="noopener noreferrer">{e.description} ↗</a>
+                        : e.description
+                      }
+                    </p>
+                  )}
+                </div>
+                <div className="l-meta">
+                  {e.location && <span className="l-loc">{e.location}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section> */}
+
+        {/* ─── §06 Interests ─────────────────────────── */}
+        {/* <section id="interests" className="sec">
+          <div className="sec-head">
+            <span className="num">{secNum('interests')}</span>
+            <h2>Personal Interests</h2>
+            <span className="count">{fmt(INTERESTS_ENTRIES.length, 'items')}</span>
+          </div>
+          <div className="l-tags">
+            {INTERESTS_ENTRIES.map((item, i) => (
+              <span key={i}>{item}</span>
+            ))}
+          </div>
+        </section> */}
+
         {/* ─── §05 Contact ───────────────────────────── */}
         <section id="contact" className="sec" style={{ marginBottom: 0 }}>
           <div className="sec-head">
             <span className="num">{secNum('contact')}</span>
             <h2>Get in touch</h2>
-            <span className="count">colophon</span>
+            <span className="count"></span>
           </div>
           <div className="colophon">
             <div className="col">
@@ -255,9 +296,6 @@ export default function Portfolio() {
 
           <footer className="foot">
             <div>© Nargiz A. — 2026</div>
-            <div className="right">
-              № 0002 / Edition of <b>∞</b>
-            </div>
           </footer>
         </section>
       </div>

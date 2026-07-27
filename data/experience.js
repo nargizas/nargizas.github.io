@@ -20,10 +20,10 @@ export const EXPERIENCE_ENTRIES = [
   {
     range: '<b>2023</b> — 2023',
     role: 'Research Intern, Software Engineering',
-    org: 'COINSE Lab, Kaist',
+    org: 'COINSE Lab, KAIST',
     location: 'Daejeon, South Korea',
     type: 'Graduation thesis internship',
-    blurb: (<>Worked on my graduation thesis:{' '}
+    blurb: (<>Worked on my graduation thesis. Published in IEEE Transactions on Software Engineering:{' '}
       <a href="https://dl.acm.org/doi/10.1109/TSE.2024.3450837" target="_blank" rel="noopener noreferrer">
         Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction{' '}↗</a></>),
     tags: ['Python', 'Hugging Face', 'OpenAI API', 'Code LLMs', 'Software Engineering'],
