@@ -1,19 +1,25 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { getSectionFilter } from './filters';
 
 const EASE_OUT = [0.22, 1, 0.36, 1];
+
+const SECTION_ILLUSTRATIONS = {
+  story: '/daffodil_story.svg',
+  work: '/daffodil_work.svg',
+  fun: '/daffodil_fun.svg',
+  contact: '/daffodil_contact.svg',
+};
 
 export function DaffodilIllustration({ sectionId, className }) {
   return (
     <motion.img
       key={sectionId}
-      src="/daffodil.svg"
+      src={SECTION_ILLUSTRATIONS[sectionId] ?? SECTION_ILLUSTRATIONS.story}
       alt=""
       draggable={false}
       className={className}
-      style={{ filter: getSectionFilter(sectionId), transformOrigin: 'top center' }}
+      style={{ transformOrigin: 'top center' }}
       initial={{ clipPath: 'inset(0% 0% 78% 0%)', scale: 0.72 }}
       animate={{
         clipPath: ['inset(0% 0% 78% 0%)', 'inset(0% 0% 56% 0%)', 'inset(0% 0% 0% 0%)'],
