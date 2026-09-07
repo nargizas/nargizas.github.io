@@ -11,6 +11,7 @@ import { FunPanel } from './sections/FunPanel';
 import { ContactPanel } from './sections/ContactPanel';
 import { DaffodilIllustration } from './daffodil/DaffodilIllustration';
 import { SECTIONS } from './sections/config';
+import { EASE_OUT, SECTION_TRANSITION_DURATION } from './animation';
 
 const PANELS = {
   story: StoryPanel,
@@ -38,7 +39,7 @@ export default function PortfolioApp() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
+              transition={{ duration: SECTION_TRANSITION_DURATION, ease: EASE_OUT }}
               className="mt-12 w-full overflow-hidden"
             >
               <div className="flex w-full flex-wrap items-start justify-center gap-10 pb-4 md:gap-16">
@@ -55,9 +56,13 @@ export default function PortfolioApp() {
                       initial={{ opacity: 0, y: 16 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -16 }}
-                      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{
+                        duration: SECTION_TRANSITION_DURATION * 0.75,
+                        delay: SECTION_TRANSITION_DURATION * 0.25,
+                        ease: EASE_OUT,
+                      }}
                     >
-                      <h2 className="mb-5 font-serif text-[clamp(24px,3vw,32px)] font-medium text-ink">
+                      <h2 className="mb-5 text-[clamp(24px,3vw,32px)] font-medium text-ink">
                         {section.heading}
                       </h2>
                       <p className="mb-12 max-w-[520px] text-[17px] leading-relaxed text-ink/60">

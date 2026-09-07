@@ -1,22 +1,23 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { DaffodilIcon } from '@/components/daffodil/DaffodilIcon';
+import { DaffodilBadge } from '@/components/daffodil/DaffodilBadge';
 import { SECTIONS } from './config';
+
+const LANDING_SIZE = Math.round(180 * 1.75);
 
 export function SectionNav({ activeSection, onSelect }) {
   const isLanding = activeSection == null;
 
   return (
     <div
-      className={`flex w-full flex-wrap items-end justify-center transition-[margin-top] duration-500 ${
+      className={`flex w-full flex-wrap items-center justify-center transition-[margin-top] duration-500 ${
         isLanding ? 'mt-14 gap-[clamp(20px,3vw,32px)]' : 'mt-7 gap-4'
       }`}
     >
       {SECTIONS.map((section) => {
         const active = section.id === activeSection;
-        const size = isLanding ? 180 : active ? 76 : 60;
-        const height = Math.round((size * 560) / 832);
+        const size = isLanding ? LANDING_SIZE : active ? 76 : 60;
 
         return (
           <motion.button
@@ -25,20 +26,11 @@ export function SectionNav({ activeSection, onSelect }) {
             layout
             transition={{ duration: 0.5, ease: 'easeOut' }}
             onClick={() => onSelect(section.id)}
-            className={`flex cursor-pointer flex-col items-center bg-transparent p-0 ${
-              isLanding ? 'gap-4' : 'gap-2'
-            }`}
+            className="flex cursor-pointer items-center justify-center bg-transparent p-0"
           >
-            <motion.div layout className="overflow-hidden rounded-xl" style={{ width: size, height }}>
-              <DaffodilIcon sectionId={section.id} className="block h-auto w-full" />
+            <motion.div layout style={{ width: size, height: size }}>
+              <DaffodilBadge sectionId={section.id} label={section.navLabel} size={size} active={isLanding || active} />
             </motion.div>
-            <span
-              className={`font-medium transition-colors duration-300 ${
-                isLanding ? 'text-[15px]' : 'text-[11px]'
-              } ${isLanding || active ? 'text-ink' : 'text-ink/45'}`}
-            >
-              {section.navLabel}
-            </span>
           </motion.button>
         );
       })}

@@ -10,7 +10,7 @@ export function Landing({ isLanding, onNameClick }) {
     <div className="flex flex-col items-center text-center">
       <h1
         onClick={onNameClick}
-        className={`cursor-pointer font-serif font-medium leading-[1.1] tracking-tight transition-[font-size] duration-500 ${
+        className={`cursor-pointer font-display font-medium leading-[1.1] tracking-tight transition-[font-size] duration-500 ${
           isLanding ? 'text-[clamp(34px,5vw,56px)]' : 'text-[26px]'
         }`}
       >

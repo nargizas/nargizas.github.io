@@ -5,8 +5,7 @@
 @import "shadcn/tailwind.css";
 
 @theme inline {
-    --font-heading: var(--font-serif);
-    --font-serif: var(--font-serif);
+    --font-display: var(--font-display);
     --font-sans: var(--font-sans);
     --color-paper: var(--paper);
     --color-paper-2: var(--paper-2);

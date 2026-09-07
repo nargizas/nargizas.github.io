@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-
-const EASE_OUT = [0.22, 1, 0.36, 1];
+import { EASE_OUT, SECTION_TRANSITION_DURATION } from '@/components/animation';
 
 const SECTION_ILLUSTRATIONS = {
   story: '/daffodil_story.svg',
@@ -25,7 +24,7 @@ export function DaffodilIllustration({ sectionId, className }) {
         clipPath: ['inset(0% 0% 78% 0%)', 'inset(0% 0% 56% 0%)', 'inset(0% 0% 0% 0%)'],
         scale: [0.72, 1, 1],
       }}
-      transition={{ duration: 0.9, ease: EASE_OUT, times: [0, 0.55, 1] }}
+      transition={{ duration: SECTION_TRANSITION_DURATION, ease: EASE_OUT, times: [0, 0.55, 1] }}
     />
   );
 }
