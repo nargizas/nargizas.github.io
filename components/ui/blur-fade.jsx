@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react"
 import { AnimatePresence, motion, useInView } from "motion/react";
+import { EASE_OUT } from '@/components/animation';
 
 const getFilter = (v) =>
   typeof v === "function" ? undefined : v.filter
@@ -55,7 +56,7 @@ export function BlurFade({
         transition={{
           delay: 0.04 + delay,
           duration,
-          ease: "easeOut",
+          ease: EASE_OUT,
           ...(shouldTransitionFilter ? { filter: { duration } } : {}),
         }}
         className={className}
