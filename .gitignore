@@ -54,3 +54,10 @@ node_modules/
 out/
 
 
+# agents
+.claude/
+*/skills/
+skills-lock.json
+/plans
+
+.DS_Store
