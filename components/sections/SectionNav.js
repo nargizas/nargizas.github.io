@@ -24,7 +24,7 @@ export function SectionNav({ activeSection, onSelect }) {
 
   return (
     <div
-      className={`flex w-full items-center justify-center transition-[margin-top] duration-500 ease-[var(--ease-out)] ${
+      className={`flex w-full items-center justify-center transition-[margin-top] duration-500 ease-[var(--ease-out)] motion-reduce:duration-0 ${
         isLanding ? 'mt-14 flex-nowrap' : 'mt-7 flex-wrap gap-4'
       }`}
       style={isLanding ? { gap: LANDING_GAP } : undefined}
