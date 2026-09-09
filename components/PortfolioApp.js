@@ -1,85 +1,67 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion, MotionConfig } from 'motion/react';
-import { getSiteConfig } from '@/lib/content';
 import { Landing } from './sections/Landing';
 import { SectionNav } from './sections/SectionNav';
-import { StoryPanel } from './sections/StoryPanel';
-import { WorkPanel } from './sections/WorkPanel';
-import { FunPanel } from './sections/FunPanel';
-import { ContactPanel } from './sections/ContactPanel';
-import { DaffodilIllustration } from './daffodil/DaffodilIllustration';
+import { SectionTrack } from './sections/SectionTrack';
 import { SECTIONS } from './sections/config';
-import { EASE_OUT, SECTION_TRANSITION_DURATION } from './animation';
+import { EASE_OUT } from './animation';
 
-const PANELS = {
-  story: StoryPanel,
-  work: WorkPanel,
-  fun: FunPanel,
-  contact: ContactPanel,
-};
+const SECTION_IDS = new Set(SECTIONS.map((s) => s.id));
+
+function readSectionFromLocation() {
+  if (typeof window === 'undefined') return null;
+  const id = new URLSearchParams(window.location.search).get('section');
+  return SECTION_IDS.has(id) ? id : null;
+}
 
 export default function PortfolioApp() {
   const [activeSection, setActiveSection] = useState(null);
-  const site = getSiteConfig();
-  const section = SECTIONS.find((s) => s.id === activeSection);
-  const ActivePanel = activeSection ? PANELS[activeSection] : null;
+
+  // Deep-link + Back/Forward support: the section lives in the URL, and every
+  // navigation pushes a real history entry so the browser Back button undoes it.
+  useEffect(() => {
+    setActiveSection(readSectionFromLocation());
+    const onPopState = () => setActiveSection(readSectionFromLocation());
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  const navigate = useCallback((id) => {
+    setActiveSection(id);
+    const url = id ? `${window.location.pathname}?section=${id}` : window.location.pathname;
+    window.history.pushState({ section: id }, '', url);
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
       <div className="flex min-h-screen flex-col items-center bg-paper px-6 py-12 font-sans text-ink sm:px-10 md:py-24">
-        <div
-          className={`mx-auto flex w-full flex-col items-center transition-[max-width] duration-500 ease-[var(--ease-out)] motion-reduce:duration-0 ${
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE_OUT }}
+          className={`mx-auto flex w-full flex-col items-center ${
             activeSection ? 'max-w-[1120px]' : 'max-w-[1400px]'
           }`}
         >
-          <Landing isLanding={!activeSection} onNameClick={() => setActiveSection(null)} />
-          <SectionNav activeSection={activeSection} onSelect={setActiveSection} />
+          <Landing isLanding={!activeSection} onNameClick={() => navigate(null)} />
+          <SectionNav activeSection={activeSection} onSelect={navigate} />
 
-          <AnimatePresence>
-            {section && ActivePanel && (
+          <AnimatePresence initial={false}>
+            {activeSection && (
               <motion.div
-                key="detail"
-                initial={{ height: 0 }}
-                animate={{ height: 'auto', transition: { duration: SECTION_TRANSITION_DURATION, ease: EASE_OUT } }}
-                exit={{
-                  height: 0,
-                  opacity: 0,
-                  transition: { duration: SECTION_TRANSITION_DURATION, ease: EASE_OUT },
-                }}
-                className="relative mt-12 w-full overflow-hidden"
+                key="track"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1, transition: { duration: 0.4, ease: EASE_OUT, delay: 0.15 } }}
+                exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.25, ease: EASE_OUT } }}
+                className="mt-12 w-full"
               >
-                <AnimatePresence initial={false}>
-                  <motion.div
-                    key={activeSection}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -16, position: 'absolute' }}
-                    transition={{ duration: SECTION_TRANSITION_DURATION * 0.75, ease: EASE_OUT }}
-                    className="flex w-full flex-wrap items-start justify-center gap-10 pb-4 md:gap-16"
-                  >
-                    <div className="flex flex-1 basis-[260px] justify-center" style={{ maxWidth: 320 }}>
-                      <div className="w-full">
-                        <DaffodilIllustration sectionId={activeSection} className="block h-auto w-full" />
-                      </div>
-                    </div>
-
-                    <div className="min-w-0 flex-[2_1_380px] text-left" style={{ maxWidth: 560 }}>
-                      <h2 className="mb-5 text-[clamp(24px,3vw,32px)] font-medium text-ink">
-                        {section.heading}
-                      </h2>
-                      <p className="mb-12 max-w-[520px] text-[17px] leading-relaxed text-ink/60">
-                        {section.subtitle(site)}
-                      </p>
-                      <ActivePanel />
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+                <SectionTrack activeSection={activeSection} />
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </MotionConfig>
   );

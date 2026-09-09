@@ -7,7 +7,7 @@ import { DaffodilIcon } from './DaffodilIcon';
 // fraction of its frame — so cover-fit renders all four at matching size.
 const TEXT_RADIUS_FRACTION = 0.48;
 const FONT_SIZE_FRACTION = 0.078;
-const MIN_FONT_SIZE = 9;
+const MIN_FONT_SIZE = 12;
 
 export function DaffodilBadge({ sectionId, label, size, active, className }) {
   const cx = size / 2;

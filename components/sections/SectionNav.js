@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { EASE_OUT } from '@/components/animation';
+import { EASE_OUT, LAYOUT_TRANSITION } from '@/components/animation';
 import { DaffodilBadge } from '@/components/daffodil/DaffodilBadge';
 import { SECTIONS } from './config';
 
@@ -23,11 +23,11 @@ export function SectionNav({ activeSection, onSelect }) {
   const isLanding = activeSection == null;
 
   return (
-    <div
-      className={`flex w-full items-center justify-center transition-[margin-top] duration-500 ease-[var(--ease-out)] motion-reduce:duration-0 ${
-        isLanding ? 'mt-14 flex-nowrap' : 'mt-7 flex-wrap gap-4'
-      }`}
-      style={isLanding ? { gap: LANDING_GAP } : undefined}
+    <motion.div
+      layout
+      transition={LAYOUT_TRANSITION}
+      className={`flex w-full flex-nowrap items-center justify-center ${isLanding ? 'mt-14' : 'mt-7'}`}
+      style={{ gap: LANDING_GAP }}
     >
       {SECTIONS.map((section) => {
         const active = section.id === activeSection;
@@ -39,11 +39,17 @@ export function SectionNav({ activeSection, onSelect }) {
             key={section.id}
             type="button"
             layout
-            transition={{ duration: 0.5, ease: EASE_OUT }}
+            animate={{ opacity: isLanding || active ? 1 : 0.4 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{
+              layout: LAYOUT_TRANSITION,
+              scale: { duration: 0.16, ease: EASE_OUT },
+              opacity: LAYOUT_TRANSITION,
+            }}
             onClick={() => onSelect(section.id)}
             className="flex cursor-pointer items-center justify-center bg-transparent p-0"
           >
-            <motion.div layout style={{ width: displaySize, height: displaySize }}>
+            <motion.div layout transition={LAYOUT_TRANSITION} style={{ width: displaySize, height: displaySize }}>
               <DaffodilBadge
                 sectionId={section.id}
                 label={section.navLabel}
@@ -55,6 +61,6 @@ export function SectionNav({ activeSection, onSelect }) {
           </motion.button>
         );
       })}
-    </div>
+    </motion.div>
   );
 }
