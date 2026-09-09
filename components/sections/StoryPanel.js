@@ -1,17 +1,22 @@
 'use client';
 
-import { getStoryGroups } from '@/lib/content';
+import { getSiteConfig, getStoryGroups } from '@/lib/content';
 import { BlurFade } from '@/components/ui/blur-fade';
-import { Button } from '@/components/ui/button';
 
 export function StoryPanel() {
+  const { about } = getSiteConfig();
   const groups = getStoryGroups();
   let rowIndex = 0;
 
   return (
     <div className="flex flex-col gap-10">
+      {about && (
+        <BlurFade delay={0}>
+          <p className="max-w-[520px] text-[15px] leading-relaxed text-ink/70">{about}</p>
+        </BlurFade>
+      )}
       {groups.map((group, gi) => (
-        <div key={group.id} className={gi > 0 ? 'border-t border-ink/10 pt-10' : ''}>
+        <div key={group.id} className={gi > 0 || about ? 'border-t border-ink/10 pt-10' : ''}>
           <h3 className="mb-5 font-display text-xl font-medium tracking-tight text-ink">{group.label}</h3>
           <div className="flex flex-col gap-3.5">
             {group.rows.map((row) => {
@@ -28,16 +33,6 @@ export function StoryPanel() {
                         {row.org ? `, ${row.org}` : ''}
                       </div>
                       {row.blurb && <p className="mt-1 text-sm leading-relaxed text-ink/60">{row.blurb}</p>}
-                      {row.publication && (
-                        <p className="mt-1 text-sm leading-relaxed text-ink/60">
-                          Published in {row.publication.venue}:{' '}
-                          <Button asChild variant="link" className="h-auto whitespace-normal p-0 text-left">
-                            <a href={row.publication.href} target="_blank" rel="noopener noreferrer">
-                              {row.publication.title}&nbsp;↗
-                            </a>
-                          </Button>
-                        </p>
-                      )}
                       {row.tags?.length > 0 && (
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           {row.tags.map((tag) => (

@@ -3,8 +3,8 @@ const article = (word) => (/^[aeiou]/i.test(word) ? 'an' : 'a');
 export const SECTIONS = [
   {
     id: 'story',
-    navLabel: 'my story',
-    heading: 'My story',
+    navLabel: 'about',
+    heading: 'About',
     subtitle: (site) => `Hi, I'm ${site.name.split(' ')[0]}. I'm ${article(site.role)} ${site.role}.`,
   },
   {

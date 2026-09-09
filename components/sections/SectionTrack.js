@@ -35,13 +35,16 @@ export function SectionTrack({ activeSection }) {
   const [height, setHeight] = useState(null);
 
   useLayoutEffect(() => {
-    const measure = () => {
-      const node = slideRefs.current[activeSection];
-      if (node) setHeight(node.offsetHeight);
-    };
+    const node = slideRefs.current[activeSection];
+    if (!node) return;
+    // ResizeObserver (not just a window-resize listener) so height also
+    // re-tracks when the active panel's own content changes size for a
+    // reason other than viewport width — e.g. switching tabs inside Work.
+    const measure = () => setHeight(node.offsetHeight);
     measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
+    const observer = new ResizeObserver(measure);
+    observer.observe(node);
+    return () => observer.disconnect();
   }, [activeSection]);
 
   return (
@@ -83,7 +86,7 @@ export function SectionTrack({ activeSection }) {
               </div>
 
               <div className="min-w-0 flex-[2_1_380px] text-left" style={{ maxWidth: 560 }}>
-                <h2 className="mb-5 text-[clamp(24px,3vw,32px)] font-medium text-ink">{section.heading}</h2>
+                <h2 className="sr-only">{section.heading}</h2>
                 <p className="mb-12 max-w-[520px] text-[17px] leading-relaxed text-ink/60">
                   {section.subtitle(site)}
                 </p>

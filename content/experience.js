@@ -1,11 +1,19 @@
 export const EXPERIENCE_ENTRIES = [
   {
     range: { start: '2026', end: null },
+    role: 'AI Engineer',
+    org: 'KOZ AI',
+    type: 'Full-time',
+    blurb: 'Demand forecasting for QSR kitchens — cutting food waste and speeding up prep.',
+    tags: ['Python', 'Time Series', 'Forecasting', 'Clustering', 'Statistical Modeling'],
+  },
+  {
+    range: { start: '2026', end: '2026' },
     role: 'Software Engineer intern',
     org: 'Seco Tools',
     location: 'Erkrath, Germany',
     type: 'Internship',
-    blurb: 'Building VR factory tour for a cutting tools manufacturing company. Mixing 360° video with 3D assets, spatial audio, interactive hotspots.',
+    blurb: 'Built VR factory tours and immersive training experiences for industrial clients.',
     tags: ['VR', 'Unity', 'C#', 'Meta Quest', 'XR Interaction Toolkit'],
   },
   {
@@ -14,7 +22,7 @@ export const EXPERIENCE_ENTRIES = [
     org: 'Sentience',
     location: 'Seoul, South Korea',
     type: 'Full-time',
-    blurb: 'Created AI opponent using deep reinforcement learning for South Pole Bebop PvPvE game. Built the training pipeline and evaluation harness, ran experiments on model architectures and reward shaping. Started as an intern.',
+    blurb: 'Built reinforcement-learning game AI, from training pipeline to evaluation. Started as an intern.',
     tags: ['Python', 'PyTorch', 'Ray RLlib', 'Reinforcement Learning', 'Game AI', 'Gymnasium', 'Unity', 'Go'],
   },
   {
@@ -24,11 +32,6 @@ export const EXPERIENCE_ENTRIES = [
     location: 'Daejeon, South Korea',
     type: 'Graduation thesis internship',
     blurb: 'Worked on my graduation thesis.',
-    publication: {
-      venue: 'IEEE Transactions on Software Engineering',
-      title: 'Evaluating Diverse Large Language Models for Automatic and General Bug Reproduction',
-      href: 'https://dl.acm.org/doi/10.1109/TSE.2024.3450837',
-    },
     tags: ['Python', 'Hugging Face', 'OpenAI API', 'Code LLMs', 'Software Engineering'],
   },
   {
@@ -38,11 +41,6 @@ export const EXPERIENCE_ENTRIES = [
     location: 'Daejeon, South Korea',
     type: 'Internship',
     blurb: 'Explored visuo-haptic illusions in VR.',
-    publication: {
-      venue: 'IASDR 2023',
-      title: 'Designing visuo-haptic illusions for Virtual Reality applications using floor-based shape-changing displays',
-      href: 'https://dl.designresearchsociety.org/iasdr/iasdr2023/fullpapers/164/',
-    },
     tags: ['VR', 'HCI', 'Unity', 'C#'],
   },
 ];
