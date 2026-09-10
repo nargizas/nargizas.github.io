@@ -1,6 +1,6 @@
 export const EDUCATION_ENTRIES = [
   {
-    range: { start: '2023', end: '2025' },
+    range: { start: 'Sep 2023', end: 'Dec 2025' },
     role: 'M.Sc. Computer Science',
     org: 'Georgia Tech',
     location: 'Atlanta, GA',
@@ -8,7 +8,7 @@ export const EDUCATION_ENTRIES = [
     tags: ['ML', 'SWE', 'Bayesian Statistics', 'Deep Learning', 'NLP', 'Game AI', 'Computer Graphics'],
   },
   {
-    range: { start: '2019', end: '2023' },
+    range: { start: 'Sep 2019', end: 'Aug 2023' },
     role: 'B.Sc. Computer Science',
     org: 'KAIST',
     location: 'Daejeon, South Korea',

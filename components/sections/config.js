@@ -1,11 +1,11 @@
-const article = (word) => (/^[aeiou]/i.test(word) ? 'an' : 'a');
-
 export const SECTIONS = [
   {
     id: 'story',
     navLabel: 'about',
     heading: 'About',
-    subtitle: (site) => `Hi, I'm ${site.name.split(' ')[0]}. I'm ${article(site.role)} ${site.role}.`,
+    subtitle: (site) =>
+      `Hi! So happy you're here. I'm ${site.name.split(' ')[0]} - which means narcissus, or daffodil. 
+    You may have noticed a few around the site ;)`,
   },
   {
     id: 'work',
@@ -23,6 +23,6 @@ export const SECTIONS = [
     id: 'contact',
     navLabel: 'contact',
     heading: 'Contact',
-    subtitle: () => 'Happy to talk research, roles, or recommendations.',
+    subtitle: () => 'Happy to talk roles, research, or recommendations.',
   },
 ];

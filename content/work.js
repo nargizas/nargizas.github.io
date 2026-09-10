@@ -9,11 +9,11 @@ export const WORK_ENTRIES = [
     category: 'ai',
     title: 'Demand forecasting for QSR kitchens.',
     year: '2026',
-    tag: 'AI Engineering · Forecasting',
+    tag: 'Applied Science · Forecasting',
     role: 'Statistical modeling, R&D',
     stack: 'Python · Nixtla · Prophet · pandas · scikit-learn',
-    caption: `Autoclustering of food products by shared ingredients, paired with R&D
-      on statistical demand models built with **Nixtla** and **Prophet** — testing how
+    caption: `Automated clustering of food products by shared ingredients. R&D
+      on statistical demand models built with **Nixtla** and **Prophet**, testing how
       weather, city events, and promotional sales shift kitchen prep needs. The goal:
       less food waste, faster prep, for quick-service kitchens.`,
   },
@@ -24,6 +24,8 @@ export const WORK_ENTRIES = [
     tag: 'Game AI · Reinforcement Learning',
     role: 'Training pipeline, evaluation',
     stack: 'Python · PyTorch · Ray RLlib · Gymnasium · Unity · Go',
+    location: 'Steam',
+    href: 'https://store.steampowered.com/app/2184470/South_Pole_Bebop/',
     caption: `Deep reinforcement learning AI opponent for **South Pole Bebop**, a PvPvE
       game. Built the training pipeline and evaluation harness, then ran experiments
       across model architectures and reward shaping.`,
@@ -34,15 +36,12 @@ export const WORK_ENTRIES = [
     year: '2024',
     tag: 'Research · Bayesian stats',
     role: 'Research, code, write-up',
-    stack: 'PyMC · NumPy · psychopy · matplotlib',
+    stack: 'PyMC · NumPy · matplotlib',
     location: 'GitHub',
     href: 'https://github.com/nargizas/Bayesian-Psychometric-Fit',
-    caption: `Bayesian reanalysis of a VR perception study of how far you can push a mismatch
-      between what a user sees and feels before they notice and the immersion breaks. That
-      boundary was originally found by fitting the data to a curve and reading off the best
-      single answer. The reanalysis runs the same 16-participant dataset through a **PyMC**
-      probabilistic model: instead of one number per condition, you get a distribution of
-      plausible answers.`,
+    caption: `Revisited data from a VR experiment exploring how much what you see 
+    can differ from what you feel before you notice. Used Bayesian modelling and
+    Monte Carlo methods to explore new interpretations of the data.`,
   },
   {
     category: 'ai',
@@ -53,20 +52,21 @@ export const WORK_ENTRIES = [
     stack: 'Python · Hugging Face · OpenAI API',
     location: 'Paper',
     href: 'https://dl.acm.org/doi/10.1109/TSE.2024.3450837',
-    caption: `Evaluated how well diverse large language models can automatically and
-      generally reproduce reported software bugs from natural-language descriptions.
+    caption: `Evaluated how well diverse large language models can automatically generate tests 
+    that reproduce reported software bugs from natural-language descriptions.
       Published in **IEEE Transactions on Software Engineering**.`,
   },
   {
     category: 'vr',
-    title: 'A VR factory tour for industrial training.',
+    title: 'A VR factory tour for a manufacturer.',
     year: '2026',
     tag: 'VR · Industrial training',
     role: 'Design, development',
     stack: 'Unity · C# · Meta Quest · XR Interaction Toolkit',
+    location: 'Article',
+    href: 'https://www.secotools.com/article/seco_innovation_hubs?language=en',
     caption: `VR factory tour for a cutting-tools manufacturer, mixing 360° video with
-      3D assets, spatial audio, and interactive hotspots — hands-on training without
-      the factory floor.`,
+      3D assets, spatial audio, and interactive hotspots.`,
   },
   {
     category: 'vr',
@@ -77,8 +77,8 @@ export const WORK_ENTRIES = [
     stack: 'VR · Unity · C#',
     location: 'Paper',
     href: 'https://dl.designresearchsociety.org/iasdr/iasdr2023/fullpapers/164/',
-    caption: `Explored how a floor-based shape-changing display can create visuo-haptic
-      illusions in VR — letting a flat floor feel like a slope or a step. Published at
+    caption: `Explored how a different manipulations of a floor-based shape-changing display 
+    can create visuo-haptic illusions in VR like making something feel shorter than it actually is. Published at
       **IASDR 2023**.`,
   },
   {
@@ -86,7 +86,7 @@ export const WORK_ENTRIES = [
     title: 'A professional website for a medical aesthetician.',
     year: '2026',
     tag: 'Client work · Webflow',
-    role: 'Design, Development, deployment',
+    role: 'Design, development, deployment',
     stack: 'Webflow',
     location: 'Live site',
     href: 'https://www.doctor-krivenko.de/',

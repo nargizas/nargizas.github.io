@@ -1,13 +1,13 @@
 export const SITE = {
   name: 'Nargiz A.',
-  role: 'AI Engineer',
-  bio: 'I build AI and build with AI. My work explores how people interact with, understand, and experience intelligent systems.',
-  about: `I've spent the last few years moving
-    between reinforcement learning, applied statistics, and immersive experience design —
-    building game AI, reasoning about bugs with LLMs, and now building demand-forecasting
-    models. I like projects where the interesting part is how people actually perceive and
-    interact with a system, not just whether the model is accurate.`,
-  availability: 'Open to small, well-scoped engagements.',
+  role: 'Applied Scientist',
+  bio: 'I build intelligent systems and explore how they feel to the people using them.',
+  about: `I've always loved maths and the exact sciences. After a STEM camp for girls in
+    high school, I naturally decided to pursue ... **drumroll** ... engineering at university,
+    which somehow landed me in South Korea, where I somehow joined an human-computer interaction lab, fell
+    for coding, and embarked on my computer science journey. And now? Somehow I'm an
+    Applied Scientist??? Honestly, it's easier to just say: I like research, math, and design.`,
+  availability: 'Open to engagements.',
 };
 
 export const CONTACT_LINKS = [

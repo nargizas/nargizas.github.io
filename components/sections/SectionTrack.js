@@ -75,7 +75,7 @@ export function SectionTrack({ activeSection }) {
               style={{ width: `${100 / SECTIONS.length}%` }}
               className="flex shrink-0 flex-wrap items-start justify-center gap-10 pb-4 md:gap-16"
             >
-              <div className="flex flex-1 basis-[260px] justify-center" style={{ maxWidth: 320 }}>
+              <div className="hidden flex-1 basis-[260px] justify-center md:flex" style={{ maxWidth: 320 }}>
                 <div className="w-full">
                   <DaffodilIllustration
                     sectionId={section.id}

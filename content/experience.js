@@ -1,11 +1,11 @@
 export const EXPERIENCE_ENTRIES = [
   {
     range: { start: '2026', end: null },
-    role: 'AI Engineer',
+    role: 'Applied Scientist',
     org: 'KOZ AI',
     type: 'Full-time',
-    blurb: 'Demand forecasting for QSR kitchens — cutting food waste and speeding up prep.',
-    tags: ['Python', 'Time Series', 'Forecasting', 'Clustering', 'Statistical Modeling'],
+    blurb: 'Demand forecasting for QSR kitchens, cutting food waste and speeding up prep.',
+    tags: ['Python', 'Nixtla', 'Prophet', 'Airflow','Time Series', 'Forecasting', 'Clustering', 'Statistical Modeling'],
   },
   {
     range: { start: '2026', end: '2026' },
@@ -13,7 +13,7 @@ export const EXPERIENCE_ENTRIES = [
     org: 'Seco Tools',
     location: 'Erkrath, Germany',
     type: 'Internship',
-    blurb: 'Built VR factory tours and immersive training experiences for industrial clients.',
+    blurb: 'Built VR factory tours for industrial clients. Owned from concept to deployment.',
     tags: ['VR', 'Unity', 'C#', 'Meta Quest', 'XR Interaction Toolkit'],
   },
   {

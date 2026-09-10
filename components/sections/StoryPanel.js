@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Tabs } from 'radix-ui';
 import { getSiteConfig, getStoryGroups } from '@/lib/content';
 import { BlurFade } from '@/components/ui/blur-fade';
+import { Emphasis } from '@/components/ui/emphasis';
 import { EASE_OUT, TAB_TRANSITION } from '@/components/animation';
 
 const CONTENT_TRANSITION = { duration: 0.2, ease: EASE_OUT };
@@ -58,7 +59,7 @@ export function StoryPanel() {
     <div className="flex flex-col gap-10">
       {about && (
         <BlurFade delay={0}>
-          <p className="max-w-[520px] text-[15px] leading-relaxed text-ink/70">{about}</p>
+          <Emphasis text={about} className="max-w-[520px] text-[15px] leading-relaxed text-ink/70" />
         </BlurFade>
       )}
 
