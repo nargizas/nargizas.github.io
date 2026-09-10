@@ -77,7 +77,7 @@ export const WORK_ENTRIES = [
     stack: 'VR · Unity · C#',
     location: 'Paper',
     href: 'https://dl.designresearchsociety.org/iasdr/iasdr2023/fullpapers/164/',
-    caption: `Explored how a different manipulations of a floor-based shape-changing display 
+    caption: `Explored how different manipulations of a floor-based shape-changing display 
     can create visuo-haptic illusions in VR like making something feel shorter than it actually is. Published at
       **IASDR 2023**.`,
   },
