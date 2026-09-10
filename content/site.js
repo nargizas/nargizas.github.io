@@ -1,12 +1,13 @@
 export const SITE = {
   name: 'Nargiz A.',
   role: 'Applied Scientist',
-  bio: 'I build intelligent systems and explore how they feel to the people using them.',
-  about: `I've always loved maths and the exact sciences. After a STEM camp for girls in
-    high school, I naturally decided to pursue ... **drumroll** ... engineering at university,
-    which somehow landed me in South Korea, where I somehow joined an human-computer interaction lab, fell
-    for coding, and embarked on my computer science journey. And now? Somehow I'm an
-    Applied Scientist??? Honestly, it's easier to just say: I like research, math, and design.`,
+  bio: 'I run experiments that turn data into decisions, from game AI to demand forecasting. My background blends statistics, machine learning, and human-computer interaction research.',
+  about: `I've always loved maths and the exact sciences. 
+  So, after attending a STEM camp for girls in high school,
+  I naturally decided to pursue…**drumroll***…engineering at university.
+  That took me all the way to South Korea, where I first joined a human-computer interaction lab, fell in love with coding,
+  and started my computer science journey. And now? I'm an Applied Scientist.
+  Honestly, it's easier to just say: I like research, math, and design.`,
   availability: 'Open to engagements.',
 };
 

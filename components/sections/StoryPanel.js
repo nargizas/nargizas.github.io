@@ -59,7 +59,7 @@ export function StoryPanel() {
     <div className="flex flex-col gap-10">
       {about && (
         <BlurFade delay={0}>
-          <Emphasis text={about} className="max-w-[520px] text-[15px] leading-relaxed text-ink/70" />
+          <Emphasis text={about} className="max-w-[520px] text-balance text-[15px] leading-relaxed text-ink/70" />
         </BlurFade>
       )}
 
