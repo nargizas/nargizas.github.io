@@ -1,6 +1,7 @@
 {
   "name": "nargizas-portfolio",
   "version": "1.0.0",
+  "packageManager": "pnpm@11.1.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
