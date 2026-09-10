@@ -1,9 +1,5 @@
-'use client';
-
-import dynamic from 'next/dynamic';
-
-const Portfolio = dynamic(() => import('../components/Portfolio'), { ssr: false });
+import PortfolioApp from '../components/PortfolioApp';
 
 export default function Page() {
-  return <Portfolio />;
+  return <PortfolioApp />;
 }
