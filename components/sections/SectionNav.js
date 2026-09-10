@@ -9,7 +9,12 @@ import { SECTIONS } from './config';
 // scale, etc.) — DaffodilBadge renders at whatever CSS size it's given
 // below, so this doesn't need to match the actual on-screen pixels.
 const LANDING_SIZE = Math.round(180 * 1.75);
-const LANDING_GAP = 16;
+// Tighter spacing while the landing/bio is visible so the big blooms read as
+// one cluster; once a section is active the badges shrink and get the roomier
+// SECTION_GAP. LANDING_GAP also feeds the display-size clamp below, so both the
+// container gap and the fit-in-one-row math stay in sync for the landing state.
+const LANDING_GAP = 8;
+const SECTION_GAP = 16;
 const LANDING_MIN = 96;
 const LANDING_MAX_CONTAINER = 1400;
 const PAGE_HORIZONTAL_PADDING = 80;
@@ -27,7 +32,7 @@ export function SectionNav({ activeSection, onSelect }) {
       layout
       transition={LAYOUT_TRANSITION}
       className={`flex w-full flex-nowrap items-center justify-center ${isLanding ? 'mt-14' : 'mt-7'}`}
-      style={{ gap: LANDING_GAP }}
+      style={{ gap: isLanding ? LANDING_GAP : SECTION_GAP }}
     >
       {SECTIONS.map((section) => {
         const active = section.id === activeSection;
